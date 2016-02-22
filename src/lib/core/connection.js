@@ -27,10 +27,7 @@ class connection {
     constructor() {
         let Discordie = require('discordie');
         GLOBAL.bot = new Discordie();
-        /*let Discordie = require('discordie');
-        let events = Discordie.Events;
-        let client = new Discordie();
-        let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
+        /*let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
 
         // Attempt to reconnect if disconnected
         client.Dispatcher.on(events.DISCONNECTED, (err) => {
@@ -56,8 +53,6 @@ class connection {
      */
      connect() {
         let Discordie = require('discordie');
-        //let events = Discordie.Events;
-        //let client = new Discordie();
         let config = require(GLOBAL.k9path + '/lib/core/config.js');
         let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
         let email = config.get('email');
@@ -131,9 +126,16 @@ class connection {
     }
 
 
+    /**
+     * Join a channel by invite
+     *
+     * @since       1.0.0
+     * @access      public
+     * @param       {string} The invite code for the channel to join
+     * @return      {void}
+     * @todo        Don't forcibly re-accept every time!
+     */
     join(invite) {
-        //let Discordie = require('discordie');
-        //let client = new Discordie();
         let config = require(GLOBAL.k9path + '/lib/core/config.js');
         let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
 
