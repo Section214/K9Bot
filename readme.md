@@ -5,7 +5,9 @@
 
 K9 is (being) designed to function as a flexible, modular, multi-purpose Discord bot. More than that, however, it's my first attempt to actually learn Node.JS... So go easy on me!
 
-More information can be found at [section214.com](https://section214.com/product/k9bot).
+Right now, K9 doesn't do anything but connect to Discord... but I'm working on it!
+
+<!--More information can be found at [section214.com](https://section214.com/product/k9bot).-->
 
 ## Npm Installation
 
