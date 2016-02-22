@@ -5,8 +5,6 @@
 
 [![NPM](https://nodei.co/npm/k9bot.png?downloads=true&stars=true)](https://nodei.co/npm/k9bot/)
 
-### Welcome to our GitHub Repository
-
 K9 is (being) designed to function as a flexible, modular, multi-purpose Discord bot. More than that, however, it's my first attempt to actually learn Node.JS... So go easy on me!
 
 Right now, K9 doesn't do anything but connect to Discord... but I'm working on it!
