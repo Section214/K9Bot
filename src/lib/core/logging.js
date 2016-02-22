@@ -8,8 +8,6 @@
 
 'use strict';
 
-const winston = require('winston');
-
 
 /**
  * Logging class
@@ -27,6 +25,8 @@ class logger {
      * @return      {void}
      */
     constructor() {
+        let winston = require('winston');
+
         // Setup the transport for console (notification) logging
         this._c = new winston.Logger({
             transports: [
