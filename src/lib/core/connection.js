@@ -157,7 +157,7 @@ class connection {
         } else {
             try{
                 GLOBAL.bot.Invites.accept(invite[1]).then(function(res) {
-                    console.log(res);
+                    console.log(res.guild.id);
                 }, function() {
                     logger.notify('warning', 'The invite link was not accepted.');
                     process.exit(0);

@@ -8,12 +8,13 @@
 
 'use strict';
 
-const path       = require('path');
-const nconf      = require('nconf');
-const configRoot = path.join(GLOBAL.k9path, '../config/');
+const path        = require('path');
+const nconf       = require('nconf');
+const config_root = path.join(GLOBAL.k9path, '../config/');
 
 // Define the available config files
 const configs = {
+    'internal': 'internal.json',
     'auth': 'auth.json'
 };
 
@@ -34,9 +35,17 @@ class config {
      * @return      {void}
      */
     constructor() {
+        let config_path;
+
         Object.keys(configs).forEach(function(key) {
+            if(key === 'internal') {
+                config_path = path.join(GLOBAL.k9path, '/lib/core/configs/');
+            } else {
+                config_path = config_root;
+            }
+
             nconf.file(key, {
-                file: configRoot + configs[key]
+                file: config_path + configs[key]
             });
         });
     }
@@ -102,9 +111,16 @@ class config {
      */
     save() {
         let logger = require(path.join(GLOBAL.k9path + '/lib/core/logging.js'));
+        let config_path;
 
-        Object.keys(configs).forEach(function() {
-            nconf.save(function (err) {
+        Object.keys(configs).forEach(function(key) {
+            if(key === 'internal') {
+                config_path = path.join(GLOBAL.k9path, '/lib/core/configs/');
+            } else {
+                config_path = config_root;
+            }
+
+            nconf.save(config_path + configs[key], function (err) {
                 if(err) {
                     logger.log('error', err.message);
                     return;
