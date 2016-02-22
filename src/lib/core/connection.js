@@ -136,37 +136,43 @@ class connection {
      * @todo        Don't forcibly re-accept every time!
      */
     join(invite) {
-        let config = require(GLOBAL.k9path + '/lib/core/config.js');
-        let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
+        let config      = require(GLOBAL.k9path + '/lib/core/config.js');
+        let logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
+        let last_server = config.get('last_server');
 
         if(! invite) {
             invite = config.get('invite');
         }
 
-        // Bail if no default server is set
-        if(! invite || invite === 'The invite URL for the server to connect to') {
-            logger.notify('error', 'Please create or edit the config/auth.json file and specify an invite URL!');
-            process.exit(0);
-        }
-
-        let inviteRegex = /https?:\/\/discord\.gg\/([A-Za-z0-9-]+)\/?/;
-
-        invite = inviteRegex.exec(invite);
-
-        if(invite === null) {
-            logger.notify('error', 'The specified invite link is invalid!');
-            process.exit(0);
-        } else {
-            try{
-                GLOBAL.bot.Invites.accept(invite[1]).then(function(res) {
-                    console.log(res.guild.id);
-                }, function() {
-                    logger.notify('warning', 'The invite link was not accepted.');
-                    process.exit(0);
-                });
-            } catch(err) {
-                logger.notify('error', err);
+        if(! last_server || last_server !== invite) {
+            // Bail if no invite is set
+            if(! invite || invite === 'The invite URL for the server to connect to') {
+                logger.notify('error', 'Please create or edit the config/auth.json file and specify an invite URL!');
                 process.exit(0);
+            }
+
+            let inviteRegex = /https?:\/\/discord\.gg\/([A-Za-z0-9-]+)\/?/;
+            let code = inviteRegex.exec(invite);
+
+            if(invite === null) {
+                logger.notify('error', 'The specified invite link is invalid!');
+                process.exit(0);
+            } else {
+                try{
+                    GLOBAL.bot.Invites.accept(code[1]).then(function(res) {
+                        // Store last server so we don't have to re-accept all the time
+                        config.set('last_server', invite);
+                        config.save('internal');
+
+                        console.log(res.guild.id);
+                    }, function() {
+                        logger.notify('warning', 'The invite link was not accepted.');
+                        process.exit(0);
+                    });
+                } catch(err) {
+                    logger.notify('error', err);
+                    process.exit(0);
+                }
             }
         }
     }
