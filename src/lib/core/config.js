@@ -103,7 +103,7 @@ class config {
     save() {
         let logger = require(path.join(GLOBAL.k9path + '/lib/core/logging.js'));
 
-        Object.keys(this.configs).forEach(function() {
+        Object.keys(configs).forEach(function() {
             nconf.save(function (err) {
                 if(err) {
                     logger.log('error', err.message);

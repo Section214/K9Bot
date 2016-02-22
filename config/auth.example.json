@@ -1,4 +1,6 @@
 {
   "email": "The registered email address of the bot",
-  "password": "The password for the registered email address"
+  "password": "The password for the registered email address",
+  "token": "",
+  "invite": "The invite URL for the server to connect to"
 }

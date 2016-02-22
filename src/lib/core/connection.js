@@ -62,36 +62,48 @@ class connection {
         let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
         let email = config.get('email');
         let password = config.get('password');
+        let token = config.get('token');
+        let login_type = 'password';
 
-
-        // Bail if email or password is missing or invalid
-        if(! email || email === 'The registered email address of the bot' ||
-           ! password || password === 'The password for the registered email address') {
-            if((! email && ! password) ||
-               (! email && password === 'The password for the registered email address') ||
-               (email === 'The registered email address of the bot' && ! password) ||
-               (email === 'The registered email address of the bot' && password === 'The password for the registered email address')) {
-                logger.notify('error', 'Please create or edit the config/auth.json file and specify the bot\'s email address and password!');
-                process.exit(0);
+        // Can we login with a token?
+        if(token) {
+            login_type = 'token';
+        } else {
+            // Bail if email or password is missing or invalid
+            if(! email || email === 'The registered email address of the bot' ||
+               ! password || password === 'The password for the registered email address') {
+                if((! email && ! password) ||
+                   (! email && password === 'The password for the registered email address') ||
+                   (email === 'The registered email address of the bot' && ! password) ||
+                   (email === 'The registered email address of the bot' && password === 'The password for the registered email address')) {
+                    logger.notify('error', 'Please create or edit the config/auth.json file and specify the bot\'s email address and password!');
+                    process.exit(0);
+                }
             }
         }
 
         try {
             // Log into Discord
-            GLOBAL.bot.connect({
-                email: email,
-                password: password
-            });
+            if(login_type === 'password') {
+                GLOBAL.bot.connect({
+                    email: email,
+                    password: password
+                });
+            } else {
+                GLOBAL.bot.connect({
+                    token: token
+                });
+            }
 
             // Bail if email/pass is invalid
             GLOBAL.bot.Dispatcher.on(Discordie.Events.REQUEST_AUTH_LOGIN_ERROR, err => {
-                logger.notify('error', err.error.message + ': Email address/password combination is invalid!');
+                logger.notify('error', err.error.message + ': Email address/password combination or token is invalid!');
                 process.exit(0);
             });
 
             // Bail if gateway error occurred
             GLOBAL.bot.Dispatcher.on(Discordie.Events.REQUEST_GATEWAY_ERROR, err => {
-                logger.notify('error', err.error.message + ': A gateway error occurred. Please try again.');
+                logger.notify('error', err + ': A gateway error occurred. Please try again.');
                 process.exit(0);
             });
 
@@ -99,6 +111,12 @@ class connection {
             GLOBAL.bot.Dispatcher.on(Discordie.Events.GATEWAY_READY, err => {
                 if(! err.error) {
                     logger.notify('info', 'Connected as ' + GLOBAL.bot.User.username);
+
+                    // Save the login token
+                    if(! token) {
+                        config.set('token', GLOBAL.bot.token);
+                        config.save();
+                    }
 
                     this.join();
                 } else {
@@ -137,10 +155,9 @@ class connection {
             logger.notify('error', 'The specified invite link is invalid!');
             process.exit(0);
         } else {
-            console.log(GLOBAL.bot.Invites.accept(invite[1]));
             try{
                 GLOBAL.bot.Invites.accept(invite[1]).then(function(res) {
-                    console.log(res.channel);
+                    console.log(res);
                 }, function() {
                     logger.notify('warning', 'The invite link was not accepted.');
                     process.exit(0);
