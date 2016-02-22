@@ -124,6 +124,8 @@ class connection {
                     }
 
                     logger.notify('info', 'Connected' + login_message);
+
+                    require(GLOBAL.k9path + '/lib/core/command_processor.js');
                 } else {
                     // How the fuck did we get here?!?
                     logger.notify('error', err.error.message);
