@@ -84,7 +84,7 @@ class config {
      * @param       {bool} save - Whether or not to save before reloading
      * @return      {bool} True if reload succeeded, false otherwise
      */
-    reload(save = false) {
+    reload(save) {
         if(save) {
             save();
         }
