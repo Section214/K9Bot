@@ -43,12 +43,10 @@ class command_processor {
                 return;
             }
 
-            console.log('processing');
-
+            // Strip trigger
             command = string(command).chompLeft(trigger).s;
 
-            console.log(command);
-
+            // Do all the things!
             if(permissions.hasAccess(res.message.author.id, command)) {
                 switch(command) {
                     case 'ping':
