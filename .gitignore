@@ -40,3 +40,8 @@ tests/clover.xml
 
 # Temporary files
 *~
+
+# Personal configs
+config/auth.json
+config/config.json
+src/lib/core/configs/internal.json
