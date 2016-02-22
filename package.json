@@ -14,7 +14,8 @@
     "url": "https://section214.com"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=4",
+    "npm": ">=3"
   },
   "dependencies": {
     "discordie": "*",
