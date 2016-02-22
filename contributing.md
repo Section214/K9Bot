@@ -15,6 +15,12 @@ When contributing please ensure you follow the guidelines below so that I can ke
 
 * Fork the repository on GitHub
 * Make the changes to your forked repository
+  * As K9 is written in ES6 JavaScript, try to avoid ES5 specific syntax as much as possible
+  * No using `var`, instead use `let` and `const`
+  * All variables are `snaked_case`
+  * All functions are `camelCased`
+  * Everything must pass lint
+  * Avoid adding new modules if there is already one that does something similar
 * When committing, reference your issue (if present) and include a note about the fix
 * Push the changes to your fork and submit a pull request to the 'master' branch of the K9 repository
 
