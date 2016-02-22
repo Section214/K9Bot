@@ -46,13 +46,3 @@ if (! semver.satisfies(process.versions.node, '>=4')) {
     logger.log('error', 'K9 requires Node 4.0 or later. Please update Node to continue.');
     return;
 }
-
-var email = config.get('email');
-console.log(email);
-email = config.set('email', 'dgriffiths@section214.com');
-console.log(email);
-email = config.get('email');
-console.log(email);
-config.save();
-email = config.get('email');
-console.log(email);
