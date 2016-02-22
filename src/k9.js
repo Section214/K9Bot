@@ -26,6 +26,7 @@
 // Setup globals... the fewer the better!
 GLOBAL.k9version = '0.0.1';
 GLOBAL.k9path = __dirname;
+GLOBAL.bot = undefined;
 
 // Load all the things!
 let semver = require('semver');
