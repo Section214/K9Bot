@@ -116,7 +116,6 @@ class config {
 
         if(handle) {
             if(configs.hasOwnProperty(handle)) {
-                console.log(handle);
                 if(handle === 'internal') {
                     config_path = path.join(GLOBAL.k9path, '/lib/core/configs/');
                 } else {

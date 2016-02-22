@@ -42,7 +42,7 @@ console.log(chalk.bold.blue('Homepage') + '         http://section214.com/produc
 console.log(chalk.bold.blue('Author') + '           Daniel J Griffiths\n                 <dgriffiths@section214.com>');
 console.log('=========================================================');
 
-console.log('\nStarting K9...\nWe are in a car.');
+console.log('\nStarting K9...\nWe are in a car.\n');
 
 // Version checks
 if (! semver.satisfies(process.versions.node, '>=4')) {
