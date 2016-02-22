@@ -1,5 +1,7 @@
 # [K9Bot](https://section214.com/product/k9bot)
-[![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/Section214/K9Bot/blob/master/license.txt)
+[![npm](https://img.shields.io/npm/v/k9bot.svg)](https://www.npmjs.com/package/k9bot)[![Dependencies](https://img.shields.io/david/dgriffiths/k9bot.svg)](https://david-dm.org/section214/k9bot)[![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/Section214/K9Bot/blob/master/license.txt)
+
+[![NPM](https://nodei.co/npm/k9bot.png?downloads=true&stars=true)](https://nodei.co/npm/k9bot/)
 
 ### Welcome to our GitHub Repository
 
