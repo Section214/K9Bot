@@ -95,7 +95,7 @@ class config {
      */
     reload(save) {
         if(save) {
-            save();
+            this.save();
         }
 
         return nconf.reset();
@@ -148,7 +148,7 @@ class config {
      */
     save_all() {
         Object.keys(configs).forEach(function(key) {
-            save(key);
+            this.save(key);
         });
     }
 }
