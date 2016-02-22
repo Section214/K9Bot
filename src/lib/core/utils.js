@@ -32,10 +32,9 @@ function parseInviteCode(invite) {
  * Get the server name from an invite
  *
  * @since       1.0.0
- * @param       {string} invite The invite code
  * @return      {string} name The server name
  */
-function getServerName(invite) {
+function getServerName() {
     let config    = require(GLOBAL.k9path + '/lib/core/config.js');
     let server_id = config.get('last_server_id');
     let server    = GLOBAL.bot.Guilds.get(server_id);
