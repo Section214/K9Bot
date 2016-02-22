@@ -99,13 +99,13 @@ class connection {
             GLOBAL.bot.Dispatcher.on(Discordie.Events.GATEWAY_READY, err => {
                 if(! err.error) {
                     logger.notify('info', 'Connected as ' + GLOBAL.bot.User.username);
+
+                    this.join();
                 } else {
                     // How the fuck did we get here?!?
                     logger.notify('error', err.error.message);
                 }
             });
-
-            this.join();
         } catch(err) {
             logger.notify('error', 'An unknown error occurred. Please try again.\n' + err.message);
             process.exit(0);
