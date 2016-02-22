@@ -52,12 +52,13 @@ class connection {
      * @return      {bool} True if connected successfully, false otherwise
      */
      connect() {
-        let Discordie = require('discordie');
-        let config = require(GLOBAL.k9path + '/lib/core/config.js');
-        let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
-        let email = config.get('email');
-        let password = config.get('password');
-        let token = config.get('token');
+        let Discordie  = require('discordie');
+        let config     = require(GLOBAL.k9path + '/lib/core/config.js');
+        let logger     = require(GLOBAL.k9path + '/lib/core/logging.js');
+        let utils      = require(GLOBAL.k9path + '/lib/core/utils.js');
+        let email      = config.get('email');
+        let password   = config.get('password');
+        let token      = config.get('token');
         let login_type = 'password';
 
         // Can we login with a token?
@@ -105,7 +106,7 @@ class connection {
             // Connected!
             GLOBAL.bot.Dispatcher.on(Discordie.Events.GATEWAY_READY, err => {
                 if(! err.error) {
-                    logger.notify('info', 'Connected as ' + GLOBAL.bot.User.username);
+                    let login_message = ' as ' + GLOBAL.bot.User.username;
 
                     // Save the login token
                     if(! token) {
@@ -114,6 +115,15 @@ class connection {
                     }
 
                     this.join();
+
+                    // Display some server info
+                    let server_name = utils.getServerName();
+
+                    if(server_name) {
+                        login_message = ' to ' + server_name + login_message;
+                    }
+
+                    logger.notify('info', 'Connected' + login_message);
                 } else {
                     // How the fuck did we get here?!?
                     logger.notify('error', err.error.message);
@@ -138,7 +148,8 @@ class connection {
     join(invite) {
         let config      = require(GLOBAL.k9path + '/lib/core/config.js');
         let logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
-        let last_server = config.get('last_server');
+        let utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
+        let last_server = config.get('last_server_invite');
 
         if(! invite) {
             invite = config.get('invite');
@@ -151,20 +162,18 @@ class connection {
                 process.exit(0);
             }
 
-            let inviteRegex = /https?:\/\/discord\.gg\/([A-Za-z0-9-]+)\/?/;
-            let code = inviteRegex.exec(invite);
+            let code = utils.parseInviteCode(invite);
 
-            if(invite === null) {
+            if(code === null) {
                 logger.notify('error', 'The specified invite link is invalid!');
                 process.exit(0);
             } else {
                 try{
-                    GLOBAL.bot.Invites.accept(code[1]).then(function(res) {
+                    GLOBAL.bot.Invites.accept(code).then(function(res) {
                         // Store last server so we don't have to re-accept all the time
-                        config.set('last_server', invite);
+                        config.set('last_server_invite', invite);
+                        config.set('last_server_id', res.guild.id);
                         config.save('internal');
-
-                        console.log(res.guild.id);
                     }, function() {
                         logger.notify('warning', 'The invite link was not accepted.');
                         process.exit(0);
