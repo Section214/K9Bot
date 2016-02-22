@@ -25,11 +25,37 @@ class command_processor {
      * @return      {void}
      */
     constructor() {
-        let Discordie = require('discordie');
-        let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
+        let string      = require('string');
+        let Discordie   = require('discordie');
+        let logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
+        let config      = require(GLOBAL.k9path + '/lib/core/config.js');
+        let permissions = require(GLOBAL.k9path + '/lib/core/permissions.js');
+        let utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
+        let trigger     = config.get('trigger', '!').toLowerCase();
 
         GLOBAL.bot.Dispatcher.on(Discordie.Events.MESSAGE_CREATE, (res) => {
-            logger.notify('info', 'New message:\n' + JSON.stringify(res.message, null, " ") + '\n' + res.message.content);
+            logger.notify('info', 'New message:\n  From: ' + res.message.author.username + '\n  Content: ' + res.message.content + '\n  Timestamp: ' + res.message.timestamp );
+
+            let command = res.message.content.toLowerCase();
+
+            // Make sure we're talking to K9!
+            if(! string(command).startsWith(trigger) && ! utils.isBotMessage(res.message.channel_id)) {
+                return;
+            }
+
+            console.log('processing');
+
+            command = string(command).chompLeft(trigger).s;
+
+            console.log(command);
+
+            if(permissions.hasAccess(res.message.author.id, command)) {
+                switch(command) {
+                    case 'ping':
+                        res.message.reply('pong');
+                        break;
+                }
+            }
         });
     }
 }

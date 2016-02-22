@@ -48,7 +48,23 @@ function getServerName(invite) {
     }
 }
 
+
+/**
+ * Check if a message is a PM to the bot
+ *
+ * @since       1.0.0
+ * @param       {string} channel_id The ID of the channel to check
+ * @return      {bool} True if PM, false otherwise
+ */
+function isBotMessage(channel_id) {
+    let channel = GLOBAL.bot.DirectMessageChannels.get(channel_id);
+
+    return (! channel ) ? false : true;
+}
+
+
 module.exports = {
     parseInviteCode: parseInviteCode,
-    getServerName:   getServerName
+    getServerName:   getServerName,
+    isBotMessage:    isBotMessage
 };

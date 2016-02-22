@@ -1,5 +1,6 @@
 {
   "email": "The registered email address of the bot",
   "password": "The password for the registered email address",
-  "invite": "The invite URL for the server to connect to"
+  "invite": "The invite URL for the server to connect to",
+  "owner_id": "The ID of the bot owner (run \@yourname on Discord to get this)"
 }
