@@ -31,7 +31,7 @@ GLOBAL.k9path = __dirname;
 let semver = require('semver');
 let chalk = require('chalk');
 let logger = require('./lib/core/logging.js');
-let config = require('./lib/core/config.js');
+let connection = require('./lib/core/connection.js');
 
 // Banner
 console.log(chalk.bold('\nK9 - A flexible, modular bot for the Discord chat service'));
@@ -48,3 +48,6 @@ if (! semver.satisfies(process.versions.node, '>=4')) {
     logger.log('error', 'K9 requires Node 4.0 or later. Please update Node to continue.');
     return;
 }
+
+// Go!
+connection.connect();

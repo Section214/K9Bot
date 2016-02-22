@@ -8,6 +8,15 @@
 
 'use strict';
 
+const path       = require('path');
+const nconf      = require('nconf');
+const configRoot = path.join(GLOBAL.k9path, '../config/');
+
+// Define the available config files
+const configs = {
+    'auth': 'auth.json'
+};
+
 
 /**
  * Config class
@@ -25,15 +34,6 @@ class config {
      * @return      {void}
      */
     constructor() {
-        let path       = require('path');
-        let nconf      = require('nconf');
-        let configRoot = path.join(GLOBAL.k9path, '../config/');
-
-        // Define the available config files
-        let configs = {
-            'auth': 'auth.json'
-        };
-
         Object.keys(configs).forEach(function(key) {
             nconf.file(key, {
                 file: configRoot + configs[key]
@@ -52,7 +52,7 @@ class config {
      * @return      {*} val - The value of the retrieved key
      */
     get(key, fallback) {
-        let val = this.nconf.get(key);
+        let val = nconf.get(key);
 
         if(! val) {
             val = fallback;
@@ -72,7 +72,7 @@ class config {
      * @return      {bool} True if set succeeded, false otherwise
      */
     set(key, value) {
-        return this.nconf.set(key, value);
+        return nconf.set(key, value);
     }
 
 
@@ -89,7 +89,7 @@ class config {
             save();
         }
 
-        return this.nconf.reset();
+        return nconf.reset();
     }
 
 
@@ -101,10 +101,10 @@ class config {
      * @return      {void}
      */
     save() {
-        let logger = require(this.path.join(GLOBAL.k9path + '/lib/core/logging.js'));
+        let logger = require(path.join(GLOBAL.k9path + '/lib/core/logging.js'));
 
         Object.keys(this.configs).forEach(function() {
-            this.nconf.save(function (err) {
+            nconf.save(function (err) {
                 if(err) {
                     logger.log('error', err.message);
                     return;
