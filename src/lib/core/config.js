@@ -53,7 +53,7 @@ class config {
      * @return      {*} val - The value of the retrieved key
      */
     get(key, fallback) {
-        var val = nconf.get(key);
+        let val = nconf.get(key);
 
         if(! val) {
             val = fallback;

@@ -26,10 +26,10 @@ GLOBAL.k9version = '0.0.1';
 GLOBAL.k9path = __dirname;
 
 // Load all the things!
-var semver = require('semver');
-var chalk = require('chalk');
-var logger = require('./lib/core/logging.js');
-var config = require('./lib/core/config.js');
+let semver = require('semver');
+let chalk = require('chalk');
+let logger = require('./lib/core/logging.js');
+let config = require('./lib/core/config.js');
 
 // Banner
 console.log(chalk.bold('\nK9 - A flexible, modular bot for the Discord chat service'));
