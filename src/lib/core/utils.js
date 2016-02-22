@@ -37,7 +37,6 @@ function parseInviteCode(invite) {
  */
 function getServerName(invite) {
     let config    = require(GLOBAL.k9path + '/lib/core/config.js');
-    let Discordie = require('discordie');
     let server_id = config.get('last_server_id');
     let server    = GLOBAL.bot.Guilds.get(server_id);
 
