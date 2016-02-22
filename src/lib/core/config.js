@@ -103,31 +103,53 @@ class config {
 
 
     /**
-     * Saves the config file to disk
+     * Saves a config file to disk
      *
      * @since       1.0.0
      * @access      public
+     * @param       string handle The handle of a specific config file to save
      * @return      {void}
      */
-    save() {
+    save(handle) {
         let logger = require(path.join(GLOBAL.k9path + '/lib/core/logging.js'));
         let config_path;
 
-        Object.keys(configs).forEach(function(key) {
-            if(key === 'internal') {
-                config_path = path.join(GLOBAL.k9path, '/lib/core/configs/');
-            } else {
-                config_path = config_root;
-            }
-
-            nconf.save(config_path + configs[key], function (err) {
-                if(err) {
-                    logger.log('error', err.message);
-                    return;
+        if(handle) {
+            if(configs.hasOwnProperty(handle)) {
+                console.log(handle);
+                if(handle === 'internal') {
+                    config_path = path.join(GLOBAL.k9path, '/lib/core/configs/');
+                } else {
+                    config_path = config_root;
                 }
 
-                logger.notify('info', 'Configuration saved successfully.');
-            });
+                nconf.save(config_path + configs[handle], function (err) {
+                    if(err) {
+                        logger.log('error', err.message);
+                        return;
+                    }
+
+                    logger.notify('info', 'Configuration saved successfully.');
+                });
+            }
+        } else {
+            logger.log('silly', 'No config file specified!');
+            return;
+        }
+    }
+
+
+    /**
+     * Saves ALL config files... you probably don't want this!
+     * This function ONLY exists for doing a sanity check when K9 quits
+     *
+     * @since       1.0.3
+     * @access      public
+     * @return      {void}
+     */
+    save_all() {
+        Object.keys(configs).forEach(function(key) {
+            save(key);
         });
     }
 }

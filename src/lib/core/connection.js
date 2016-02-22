@@ -115,7 +115,7 @@ class connection {
                     // Save the login token
                     if(! token) {
                         config.set('token', GLOBAL.bot.token);
-                        config.save();
+                        config.save('internal');
                     }
 
                     this.join();
