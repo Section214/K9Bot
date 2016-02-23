@@ -1,3 +1,8 @@
+## v0.1.1 / Mon, 22 Feb 2016
+* We know, we're going crazy with the updates today... but we just wanted to have a REAL milestone out ASAP! That milestone is NOW!
+* We decided that a dog with only one trick was kinda lame... so we added `join`, `part/leave`, `afk`, and half a dozen different ways to tell K9 to shove off!
+* If you REALLY want it, we added a tiny little shell script for those of you who are Node impaired (you still have to actually install the dependencies though).
+
 ## v0.1.0 / Mon, 22 Feb 2016
 * This is a super special release! K9 learned his first trick! He finally learned how to play ping-pong!
 * We thought you might like to know what we're working on... so we added this nifty changelog with retroactive deets for your reading pleasure!
