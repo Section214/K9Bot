@@ -1,3 +1,6 @@
+## v0.1.2 / Mon, 22 Feb 2016
+* Tiny little patch because we were stupid and forgot to update the readme
+
 ## v0.1.1 / Mon, 22 Feb 2016
 * We know, we're going crazy with the updates today... but we just wanted to have a REAL milestone out ASAP! That milestone is NOW!
 * We decided that a dog with only one trick was kinda lame... so we added `join`, `part/leave`, `afk`, and half a dozen different ways to tell K9 to shove off!
