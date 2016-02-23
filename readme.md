@@ -13,7 +13,7 @@ Right now, K9 doesn't do anything but connect to Discord... but I'm working on i
 
 ## Npm Installation
 
-Installing with npm is not yet supported... be patient!
+`npm install k9bot`
 
 ## Git Installation
 
