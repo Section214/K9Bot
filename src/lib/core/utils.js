@@ -39,7 +39,7 @@ function getServerName() {
     let server_id = config.get('last_server_id');
     let server    = GLOBAL.bot.Guilds.get(server_id);
 
-    if(server.name) {
+    if(server && server.name) {
         return server.name;
     } else {
         return null;

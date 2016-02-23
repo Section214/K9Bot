@@ -36,21 +36,63 @@ class command_processor {
         GLOBAL.bot.Dispatcher.on(Discordie.Events.MESSAGE_CREATE, (res) => {
             logger.notify('info', 'New message:\n  From: ' + res.message.author.username + '\n  Content: ' + res.message.content + '\n  Timestamp: ' + res.message.timestamp );
 
-            let command = res.message.content.toLowerCase();
+            let command_string = res.message.content;
 
             // Make sure we're talking to K9!
-            if(! string(command).startsWith(trigger) && ! utils.isBotMessage(res.message.channel_id)) {
+            if(! string(command_string.toLowerCase()).startsWith(trigger.toLowerCase()) && ! utils.isBotMessage(res.message.channel_id)) {
                 return;
             }
 
+            // Parse out any arguements
+            command_string = command_string.split(' ');
+            let command   = command_string.reverse().pop();
+            let arguement = command_string.reverse().join(' ');
+
             // Strip trigger
-            command = string(command).chompLeft(trigger).s;
+            command = string(command.toLowerCase()).chompLeft(trigger.toLowerCase()).s;
 
             // Do all the things!
             if(permissions.hasAccess(res.message.author.id, command)) {
                 switch(command) {
                     case 'ping':
                         res.message.reply('pong');
+                        break;
+                    case 'join':
+                        if(! arguement || arguement === ' ') {
+                            res.message.reply('No channel specified!');
+                        }
+
+                        // Try to find and join the channel
+                        res.message.channel.guild.channels.forEach(channel => {
+                            if(channel.name === arguement && channel.type === 'voice') {
+                                channel.join();
+                            }
+                        });
+                        break;
+                    case 'leave':
+                    case 'part':
+                        res.message.channel.guild.channels.forEach(channel => {
+                            if(channel.joined) {
+                                channel.leave();
+                            }
+                        });
+                        break;
+                    case 'afk':
+                        let afk_id = res.message.channel.guild.afk_channel_id;
+
+                        if(afk_id) {
+                            res.message.channel.guild.channels.forEach(channel => {
+                                if(channel.id === afk_id) {
+                                    channel.join();
+                                }
+                            });
+                        } else {
+                            res.message.channel.guild.channels.forEach(channel => {
+                                if(channel.joined) {
+                                    channel.leave();
+                                }
+                            });
+                        }
                         break;
                 }
             }

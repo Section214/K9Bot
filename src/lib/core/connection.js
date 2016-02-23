@@ -26,21 +26,7 @@ class connection {
      */
     constructor() {
         let Discordie = require('discordie');
-        GLOBAL.bot = new Discordie();
-        /*let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
-
-        // Attempt to reconnect if disconnected
-        client.Dispatcher.on(events.DISCONNECTED, (err) => {
-            let delay = 5000;
-            let sdelay = Math.floor(delay/100)/10;
-
-            if(err.error.message.indexOf('gateway') >= 0) {
-                logger.notify('warning', 'Disconnected from gateway, reconnecting in ' + sdelay + ' seconds');
-            } else {
-                logger.notify('warning', 'Failed to login or get gateway, reconnecting in ' + sdelay + ' seconds');
-            }
-            setTimeout(this.connect, delay);
-        });*/
+        GLOBAL.bot    = new Discordie();
     }
 
 
@@ -130,6 +116,19 @@ class connection {
                     // How the fuck did we get here?!?
                     logger.notify('error', err.error.message);
                 }
+            });
+
+            // Attempt to reconnect if disconnected
+            GLOBAL.bot.Dispatcher.on(Discordie.Events.DISCONNECTED, (err) => {
+                let delay = 5000;
+                let sdelay = Math.floor(delay/100)/10;
+
+                if(err.error.message.indexOf('gateway') >= 0) {
+                    logger.notify('warning', 'Disconnected from gateway, reconnecting in ' + sdelay + ' seconds');
+                } else {
+                    logger.notify('warning', 'Failed to login or get gateway, reconnecting in ' + sdelay + ' seconds');
+                }
+                setTimeout(this.connect, delay);
             });
         } catch(err) {
             logger.notify('error', 'An unknown error occurred. Please try again.\n' + err.message);
