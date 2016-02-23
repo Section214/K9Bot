@@ -94,6 +94,17 @@ class command_processor {
                             });
                         }
                         break;
+                    case 'quit':
+                    case 'shutdown':
+                    case 'disconnect':
+                    case 'die':
+                    case 'goaway':
+                    case 'bye':
+                        logger.notify('info', 'Received exit command. Shutting down...');
+                        res.message.channel.sendMessage('Bye!');
+                        GLOBAL.bot.disconnect();
+                        process.exit(0);
+                        break;
                 }
             }
         });
