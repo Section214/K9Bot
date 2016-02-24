@@ -60,6 +60,7 @@ class command_processor {
                     case 'join':
                         if(! arguement || arguement === ' ') {
                             res.message.reply('No channel specified!');
+                            return;
                         }
 
                         // Try to find and join the channel
@@ -104,6 +105,16 @@ class command_processor {
                         res.message.channel.sendMessage('Bye!');
                         GLOBAL.bot.disconnect();
                         process.exit(0);
+                        break;
+                    case '8ball':
+                        if(! arguement || arguement === ' ') {
+                            res.message.reply('You forgot to ask a question!');
+                            return;
+                        }
+
+                        let eightBall = require(GLOBAL.k9path + '/lib/modules/8ball.js');
+
+                        res.message.reply(eightBall.go());
                         break;
                 }
             }
