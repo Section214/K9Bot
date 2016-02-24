@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       1.0.0
+ * @since       0.0.1
  */
 
 'use strict';
@@ -12,7 +12,7 @@
 /**
  * Logging class
  *
- * @since       1.0.0
+ * @since       0.0.1
  */
 class logger {
 
@@ -20,7 +20,7 @@ class logger {
     /**
      * Get things started!
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @return      {void}
      */
@@ -68,7 +68,7 @@ class logger {
     /**
      * Process a console notification
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @param       {string} type - The type of notification to output
      * @param       {string} message - The message to display
@@ -82,7 +82,7 @@ class logger {
     /**
      * Process a logged notification
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @param       {string} type - The type of notification to output
      * @param       {string} message - The message to display

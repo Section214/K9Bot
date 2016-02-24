@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       1.0.0
+ * @since       0.1.0
  */
 
 'use strict';
@@ -12,7 +12,7 @@
 /**
  * Command processor class
  *
- * @since       1.0.0
+ * @since       0.1.0
  */
 class permissions {
 
@@ -20,17 +20,23 @@ class permissions {
     /**
      * Get things started!
      *
-     * @since       1.0.0
+     * @since       0.1.0
      * @access      public
      * @return      {void}
      */
-    constructor() {}
+    constructor() {
+        //let acl     = require('acl');
+        //let config  = require(GLOBAL.k9path + '/lib/core/config.js');
+        //let logger  = require(GLOBAL.k9path + '/lib/core/logging.js');
+        //let client  = require('redis').createClient(config.get('redis_port', 6379), config.get('redist_host', '127.0.0.1'), {no_ready_check: true});
+        //let backend = new acl.redisBackend(client);
+    }
 
 
     /**
      * Check if a user can run a given command
      *
-     * @since       1.0.0
+     * @since       0.1.0
      * @access      public
      * @param       {string} user_id The ID of the requesting user
      * @param       {string} command The command to check

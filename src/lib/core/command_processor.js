@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       1.0.0
+ * @since       0.1.0
  */
 
 'use strict';
@@ -12,7 +12,7 @@
 /**
  * Command processor class
  *
- * @since       1.0.0
+ * @since       0.1.0
  */
 class command_processor {
 
@@ -20,7 +20,7 @@ class command_processor {
     /**
      * Get things started!
      *
-     * @since       1.0.0
+     * @since       0.1.0
      * @access      public
      * @return      {void}
      */

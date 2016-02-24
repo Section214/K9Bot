@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       1.0.0
+ * @since       0.0.2
  */
 
 'use strict';
@@ -12,7 +12,7 @@
 /**
  * Logging class
  *
- * @since       1.0.0
+ * @since       0.0.2
  */
 class connection {
 
@@ -20,7 +20,7 @@ class connection {
     /**
      * Get things started!
      *
-     * @since       1.0.0
+     * @since       0.0.2
      * @access      public
      * @return      {void}
      */
@@ -33,7 +33,7 @@ class connection {
     /**
      * Connect to Discord
      *
-     * @since       1.0.0
+     * @since       0.0.2
      * @access      public
      * @return      {bool} True if connected successfully, false otherwise
      */
@@ -135,7 +135,7 @@ class connection {
     /**
      * Join a channel by invite
      *
-     * @since       1.0.0
+     * @since       0.0.3
      * @access      public
      * @param       {string} The invite code for the channel to join
      * @return      {void}

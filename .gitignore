@@ -42,6 +42,7 @@ tests/clover.xml
 *~
 
 # Personal configs
+config/db.json
 config/auth.json
 config/config.json
 src/lib/core/configs/internal.json

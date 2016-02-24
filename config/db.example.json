@@ -1,0 +1,4 @@
+{
+  "redis_host": "The host for the Redis server",
+  "redis_port": "The port for the Redis server"
+}

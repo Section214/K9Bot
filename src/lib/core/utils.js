@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       1.0.0
+ * @since       0.1.0
  */
 
 'use strict';
@@ -12,7 +12,7 @@
 /**
  * Parse a Discord invite URL to retrieve the invite code
  *
- * @since       1.0.0
+ * @since       0.1.0
  * @param       {string} invite The invite URL
  * @return      {string|bool} code The parsed code, or false if invalid
  */
@@ -31,7 +31,7 @@ function parseInviteCode(invite) {
 /**
  * Get the server name from an invite
  *
- * @since       1.0.0
+ * @since       0.1.0
  * @return      {string} name The server name
  */
 function getServerName() {
@@ -50,7 +50,7 @@ function getServerName() {
 /**
  * Check if a message is a PM to the bot
  *
- * @since       1.0.0
+ * @since       0.1.0
  * @param       {string} channel_id The ID of the channel to check
  * @return      {bool} True if PM, false otherwise
  */

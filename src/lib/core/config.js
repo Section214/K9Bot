@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       1.0.0
+ * @since       0.0.1
  */
 
 'use strict';
@@ -22,7 +22,7 @@ const configs = {
 /**
  * Config class
  *
- * @since       1.0.0
+ * @since       0.0.1
  */
 class config {
 
@@ -30,7 +30,7 @@ class config {
     /**
      * Get things started!
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @return      {void}
      */
@@ -54,7 +54,7 @@ class config {
     /**
      * Get a config value with an optional fallback
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @param       {string} key - The key to retrieve
      * @param       {*} fallback - An optional fallback value
@@ -74,7 +74,7 @@ class config {
     /**
      * Set (or update) a config value
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @param       {string} key - The key to set
      * @param       {*} value - The value to set
@@ -88,7 +88,7 @@ class config {
     /**
      * Reloads the config file
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @param       {bool} save - Whether or not to save before reloading
      * @return      {bool} True if reload succeeded, false otherwise
@@ -105,7 +105,7 @@ class config {
     /**
      * Saves a config file to disk
      *
-     * @since       1.0.0
+     * @since       0.0.1
      * @access      public
      * @param       string handle The handle of a specific config file to save
      * @return      {void}
@@ -142,7 +142,7 @@ class config {
      * Saves ALL config files... you probably don't want this!
      * This function ONLY exists for doing a sanity check when K9 quits
      *
-     * @since       1.0.3
+     * @since       0.0.3
      * @access      public
      * @return      {void}
      */
