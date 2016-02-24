@@ -64,76 +64,71 @@ class connection {
             }
         }
 
-        try {
-            // Log into Discord
-            if(login_type === 'password') {
-                GLOBAL.bot.connect({
-                    email: email,
-                    password: password
-                });
-            } else {
-                GLOBAL.bot.connect({
-                    token: token
-                });
-            }
-
-            // Bail if email/pass is invalid
-            GLOBAL.bot.Dispatcher.on(Discordie.Events.REQUEST_AUTH_LOGIN_ERROR, err => {
-                logger.notify('error', err.error.message + ': Email address/password combination or token is invalid!');
-                process.exit(0);
+        // Log into Discord
+        if(login_type === 'password') {
+            GLOBAL.bot.connect({
+                email: email,
+                password: password
             });
-
-            // Bail if gateway error occurred
-            GLOBAL.bot.Dispatcher.on(Discordie.Events.REQUEST_GATEWAY_ERROR, err => {
-                logger.notify('error', err + ': A gateway error occurred. Please try again.');
-                process.exit(0);
+        } else {
+            GLOBAL.bot.connect({
+                token: token
             });
-
-            // Connected!
-            GLOBAL.bot.Dispatcher.on(Discordie.Events.GATEWAY_READY, err => {
-                if(! err.error) {
-                    let login_message = ' as ' + GLOBAL.bot.User.username;
-
-                    // Save the login token
-                    if(! token) {
-                        config.set('token', GLOBAL.bot.token);
-                        config.save('internal');
-                    }
-
-                    this.join();
-
-                    // Display some server info
-                    let server_name = utils.getServerName();
-
-                    if(server_name) {
-                        login_message = ' to ' + server_name + login_message;
-                    }
-
-                    logger.notify('info', 'Connected' + login_message);
-
-                    require(GLOBAL.k9path + '/lib/core/command_processor.js');
-                } else {
-                    // How the fuck did we get here?!?
-                    logger.notify('error', err.error.message);
-                }
-            });
-
-            // Attempt to reconnect if disconnected
-            GLOBAL.bot.Dispatcher.on(Discordie.Events.DISCONNECTED, (err) => {
-                let delay = 5000;
-                let sdelay = Math.floor(delay/100)/10;
-
-                if(err.error.message.indexOf('gateway') >= 0) {
-                    logger.notify('warning', 'Disconnected from gateway, reconnecting in ' + sdelay + ' seconds');
-                } else {
-                    logger.notify('warning', 'Failed to login or get gateway, reconnecting in ' + sdelay + ' seconds');
-                }
-                setTimeout(this.connect, delay);
-            });
-        } catch(err) {
-            logger.notify('error', 'An unknown error occurred. Please try again.\n' + err.message);
-            process.exit(0);
         }
+
+        // Bail if email/pass is invalid
+        GLOBAL.bot.Dispatcher.on(Discordie.Events.REQUEST_AUTH_LOGIN_ERROR, err => {
+            logger.notify('error', err.error.message + ': Email address/password combination or token is invalid!');
+            process.exit(0);
+        });
+
+        // Bail if gateway error occurred
+        GLOBAL.bot.Dispatcher.on(Discordie.Events.REQUEST_GATEWAY_ERROR, err => {
+            logger.notify('error', err + ': A gateway error occurred. Please try again.');
+            process.exit(0);
+        });
+
+        // Connected!
+        GLOBAL.bot.Dispatcher.on(Discordie.Events.GATEWAY_READY, err => {
+            if(! err.error) {
+                let login_message = ' as ' + GLOBAL.bot.User.username;
+
+                // Save the login token
+                if(! token) {
+                    config.set('token', GLOBAL.bot.token);
+                    config.save('internal');
+                }
+
+                this.join();
+
+                // Display some server info
+                let server_name = utils.getServerName();
+
+                if(server_name) {
+                    login_message = ' to ' + server_name + login_message;
+                }
+
+                logger.notify('info', 'Connected' + login_message);
+
+                require(GLOBAL.k9path + '/lib/core/command_processor.js');
+            } else {
+                // How the fuck did we get here?!?
+                logger.notify('error', err.error.message);
+            }
+        });
+
+        // Attempt to reconnect if disconnected
+        GLOBAL.bot.Dispatcher.on(Discordie.Events.DISCONNECTED, (err) => {
+            let delay = 5000;
+            let sdelay = Math.floor(delay/100)/10;
+
+            if(err.error.message.indexOf('gateway') >= 0) {
+                logger.notify('warning', 'Disconnected from gateway, reconnecting in ' + sdelay + ' seconds');
+            } else {
+                logger.notify('warning', 'Failed to login or get gateway, reconnecting in ' + sdelay + ' seconds');
+            }
+            setTimeout(this.connect, delay);
+        });
     }
 
 
@@ -169,20 +164,15 @@ class connection {
                 logger.notify('error', 'The specified invite link is invalid!');
                 process.exit(0);
             } else {
-                try{
-                    GLOBAL.bot.Invites.accept(code).then(function(res) {
-                        // Store last server so we don't have to re-accept all the time
-                        config.set('last_server_invite', invite);
-                        config.set('last_server_id', res.guild.id);
-                        config.save('internal');
-                    }, function() {
-                        logger.notify('warning', 'The invite link was not accepted.');
-                        process.exit(0);
-                    });
-                } catch(err) {
-                    logger.notify('error', err);
+                GLOBAL.bot.Invites.accept(code).then(function(res) {
+                    // Store last server so we don't have to re-accept all the time
+                    config.set('last_server_invite', invite);
+                    config.set('last_server_id', res.guild.id);
+                    config.save('internal');
+                }, function() {
+                    logger.notify('warning', 'The invite link was not accepted.');
                     process.exit(0);
-                }
+                });
             }
         }
     }

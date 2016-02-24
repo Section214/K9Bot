@@ -32,11 +32,8 @@ class logger {
             transports: [
                 new winston.transports.Console({
                     colorize: true,
-                    handleExceptions: true,
-                    prettyPrint: true
                 })
-            ],
-            exitOnError: false
+            ]
         });
 
 
@@ -53,6 +50,17 @@ class logger {
                     zippedArchive: true
                 })
             ]
+        });
+
+        // Error handler
+        process.on('uncaughtException', (err) => {
+            this._l.log('error', err.message);
+            process.exit(0);
+        });
+
+        process.on('uncaughtException', (err) => {
+            this._l.log('error', err.message);
+            process.exit(0);
         });
     }
 
