@@ -1,3 +1,9 @@
+## v0.1.3 / Thu, 25 Feb 2016
+* Know all those pesky little gremlins that find their way into code? Well now we handle them a bit better.
+* When K9 replies to you, it now shows the pretty little typing indicator... because who doesn't love shinies?
+* Up until now, K9 has been a bit shy. Now, the first (or next) time you run him, he'll introduce himself and help you setup an option or two!
+* We all like getting our fortune told. Now K9 can tell yours with the !8ball command! (Really, he told us that we'd be releasing this update today!)
+
 ## v0.1.2 / Mon, 22 Feb 2016
 * Tiny little patch because we were stupid and forgot to update the readme
 
