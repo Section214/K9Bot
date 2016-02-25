@@ -55,11 +55,11 @@ class command_processor {
             if(permissions.hasAccess(res.message.author.id, command)) {
                 switch(command) {
                     case 'ping':
-                        res.message.reply('pong');
+                        this.reply(res, 'pong');
                         break;
                     case 'join':
                         if(! arguement || arguement === ' ') {
-                            res.message.reply('No channel specified!');
+                            this.reply(res, 'No channel specified!');
                             return;
                         }
 
@@ -102,23 +102,50 @@ class command_processor {
                     case 'goaway':
                     case 'bye':
                         logger.notify('info', 'Received exit command. Shutting down...');
-                        res.message.channel.sendMessage('Bye!');
+                        this.say(res, 'Bye!');
                         GLOBAL.bot.disconnect();
                         process.exit(0);
                         break;
                     case '8ball':
                         if(! arguement || arguement === ' ') {
-                            res.message.reply('You forgot to ask a question!');
+                            this.reply(res, 'You forgot to ask a question!');
                             return;
                         }
 
                         let eightBall = require(GLOBAL.k9path + '/lib/modules/8ball.js');
-
-                        res.message.reply(eightBall.go());
+                        this.reply(res, eightBall.go());
                         break;
                 }
             }
         });
+    }
+
+
+    /**
+     * Post message to channel
+     *
+     * @since       0.1.3
+     * @access      public
+     * @param       {object} res The message resource
+     * @param       {string} message The message to post
+     * @return      {void}
+     */
+    say(res, message) {
+        res.message.channel.sendTyping(res.message.sendMessage(message));
+    }
+
+
+    /**
+     * Post message to user
+     *
+     * @since       0.1.3
+     * @access      public
+     * @param       {object} res The message resource
+     * @param       {string} message The message to post
+     * @return      {void}
+     */
+    reply(res, message) {
+        res.message.channel.sendTyping(res.message.reply(message));
     }
 }
 
