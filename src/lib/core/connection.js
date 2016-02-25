@@ -8,6 +8,11 @@
 
 'use strict';
 
+const Discordie = require('discordie');
+const config    = require(GLOBAL.k9path + '/lib/core/config.js');
+const logger    = require(GLOBAL.k9path + '/lib/core/logging.js');
+const utils     = require(GLOBAL.k9path + '/lib/core/utils.js');
+
 
 /**
  * Logging class
@@ -25,8 +30,7 @@ class connection {
      * @return      {void}
      */
     constructor() {
-        let Discordie = require('discordie');
-        GLOBAL.bot    = new Discordie();
+        GLOBAL.bot = new Discordie();
     }
 
 
@@ -38,10 +42,6 @@ class connection {
      * @return      {bool} True if connected successfully, false otherwise
      */
      connect() {
-        let Discordie  = require('discordie');
-        let config     = require(GLOBAL.k9path + '/lib/core/config.js');
-        let logger     = require(GLOBAL.k9path + '/lib/core/logging.js');
-        let utils      = require(GLOBAL.k9path + '/lib/core/utils.js');
         let email      = config.get('email');
         let password   = config.get('password');
         let token      = config.get('token');
@@ -146,9 +146,6 @@ class connection {
      * @todo        Don't forcibly re-accept every time!
      */
     join(invite) {
-        let config      = require(GLOBAL.k9path + '/lib/core/config.js');
-        let logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
-        let utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
         let last_server = config.get('last_server_invite');
 
         if(! invite) {
