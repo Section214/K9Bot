@@ -110,6 +110,10 @@ class connection {
 
                 logger.notify('info', 'Connected' + login_message);
 
+                // Check/process first run configuration
+                require(GLOBAL.k9path + '/lib/core/firstrun.js');
+
+                // Load command processor
                 require(GLOBAL.k9path + '/lib/core/command_processor.js');
             } else {
                 // How the fuck did we get here?!?

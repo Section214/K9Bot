@@ -15,7 +15,8 @@ const config_root = path.join(GLOBAL.k9path, '../config/');
 // Define the available config files
 const configs = {
     'internal': 'internal.json',
-    'auth': 'auth.json'
+    'auth': 'auth.json',
+    'config': 'config.json'
 };
 
 
