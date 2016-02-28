@@ -8,13 +8,17 @@
 
 'use strict';
 
-const path        = require('path');
-const nconf       = require('nconf');
-const config_root = path.join(GLOBAL.k9path, '../config/');
+const path         = require('path');
+const nconf        = require('nconf');
+const logger       = require(path.join(GLOBAL.k9path + '/lib/core/logging.js'));
+const utils        = require(path.join(GLOBAL.k9path + '/lib/core/utils.js'));
+const user_configs = path.join(GLOBAL.k9path, '../config/');
+const core_configs = path.join(GLOBAL.k9path, '/lib/core/configs/');
 
 // Define the available config files
 const configs = {
     'internal': 'internal.json',
+    'modules': 'modules.json',
     'auth': 'auth.json',
     'config': 'config.json'
 };
@@ -36,18 +40,21 @@ class config {
      * @return      {void}
      */
     constructor() {
-        let config_path;
-
         Object.keys(configs).forEach(function(key) {
-            if(key === 'internal') {
-                config_path = path.join(GLOBAL.k9path, '/lib/core/configs/');
+            if(utils.fileExists(user_configs + configs[key])) {
+                nconf.file(key, {
+                    file: user_configs + configs[key]
+                });
             } else {
-                config_path = config_root;
+                if(utils.fileExists(core_configs + configs[key])) {
+                    nconf.file(key, {
+                        file: core_configs + configs[key]
+                    });
+                } else {
+                    logger.log('error', 'Config file ' + configs[key] + ' not found!');
+                    return;
+                }
             }
-
-            nconf.file(key, {
-                file: config_path + configs[key]
-            });
         });
     }
 
@@ -112,25 +119,32 @@ class config {
      * @return      {void}
      */
     save(handle) {
-        let logger = require(path.join(GLOBAL.k9path + '/lib/core/logging.js'));
-        let config_path;
-
         if(handle) {
             if(configs.hasOwnProperty(handle)) {
-                if(handle === 'internal') {
-                    config_path = path.join(GLOBAL.k9path, '/lib/core/configs/');
-                } else {
-                    config_path = config_root;
-                }
+                if(utils.fileExists(user_configs + configs[handle])) {
+                    nconf.save(user_configs + configs[handle], function (err) {
+                        if(err) {
+                            logger.log('error', err.message);
+                            return;
+                        }
 
-                nconf.save(config_path + configs[handle], function (err) {
-                    if(err) {
-                        logger.log('error', err.message);
+                        logger.notify('info', 'Configuration saved successfully.');
+                    });
+                } else {
+                    if(utils.fileExists(core_configs + configs[handle])) {
+                        nconf.save(core_configs + configs[handle], function (err) {
+                            if(err) {
+                                logger.log('error', err.message);
+                                return;
+                            }
+
+                            logger.notify('info', 'Configuration saved successfully.');
+                        });
+                    } else {
+                        logger.log('error', 'Config file ' + configs[handle] + ' not found!');
                         return;
                     }
-
-                    logger.notify('info', 'Configuration saved successfully.');
-                });
+                }
             }
         } else {
             logger.log('silly', 'No config file specified!');

@@ -61,8 +61,31 @@ function isBotMessage(channel_id) {
 }
 
 
+/**
+ * Check if a file exists
+ *
+ * @since       0.1.4
+ * @param       {string} filepath The path to check
+ * @return      {bool} exists True if exists, false otherwise
+ */
+function fileExists(filepath) {
+    let fs     = require('fs');
+    //let path   = require('path');
+    let exists = false;
+
+    if(filepath) {
+        try {
+            exists = fs.statSync(filepath).isFile();
+        } catch (e) {}
+    }
+
+    return exists;
+}
+
+
 module.exports = {
     parseInviteCode: parseInviteCode,
     getServerName:   getServerName,
-    isBotMessage:    isBotMessage
+    isBotMessage:    isBotMessage,
+    fileExists:      fileExists
 };
