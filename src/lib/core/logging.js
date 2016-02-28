@@ -25,7 +25,16 @@ class logger {
      * @return      {void}
      */
     constructor() {
+        let fs      = require('fs');
+        let path    = require('path');
         let winston = require('winston');
+        let moment  = require('moment');
+        let utils   = require(path.join(GLOBAL.k9path + '/lib/core/utils.js'));
+
+        // Ensure the log directory exists
+        if(! utils.fileExists(path.join(GLOBAL.k9path + '/../logs'), true)) {
+            fs.mkdirSync(path.join(GLOBAL.k9path + '/../logs'));
+        }
 
         // Setup the transport for console (notification) logging
         this._c = new winston.Logger({
@@ -44,7 +53,7 @@ class logger {
                     colorize: true,
                 }),
                 new winston.transports.File({
-                    filename: 'logs/k9.log',
+                    filename: 'logs/k9-' + moment().format('YYYY-MM-DD') + '.log',
                     json: false,
                     maxsize: 102400000,
                     zippedArchive: true
