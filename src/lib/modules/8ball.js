@@ -10,7 +10,7 @@
 
 
 /**
- * Config class
+ * 8-ball Module class
  *
  * @since       0.1.3
  */
