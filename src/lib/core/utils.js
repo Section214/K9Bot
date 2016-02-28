@@ -110,9 +110,39 @@ function fileExists(filepath, isdir) {
 }
 
 
+/**
+ * Post message to channel
+ *
+ * @since       0.1.3
+ * @access      public
+ * @param       {object} res The message resource
+ * @param       {string} message The message to post
+ * @return      {void}
+ */
+function say(res, message) {
+    res.message.channel.sendTyping(res.message.channel.sendMessage(message));
+}
+
+
+/**
+ * Post message to user
+ *
+ * @since       0.1.3
+ * @access      public
+ * @param       {object} res The message resource
+ * @param       {string} message The message to post
+ * @return      {void}
+ */
+function reply(res, message) {
+    res.message.channel.sendTyping(res.message.reply(message));
+}
+
+
 module.exports = {
     parseInviteCode: parseInviteCode,
     connect:         connect,
     isBotMessage:    isBotMessage,
-    fileExists:      fileExists
+    fileExists:      fileExists,
+    say:             say,
+    reply:           reply
 };

@@ -29,8 +29,9 @@ class command_processor {
         let Discordie   = require('discordie');
         let logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
         let config      = require(GLOBAL.k9path + '/lib/core/config.js');
-        let permissions = require(GLOBAL.k9path + '/lib/core/permissions.js');
+        //let permissions = require(GLOBAL.k9path + '/lib/core/permissions.js');
         let utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
+        let modules     = require(GLOBAL.k9path + '/lib/core/modules.js');
         let trigger     = config.get('trigger', '!').toLowerCase();
 
         GLOBAL.bot.Dispatcher.on(Discordie.Events.MESSAGE_CREATE, (res) => {
@@ -52,121 +53,17 @@ class command_processor {
             // Strip trigger
             command = string(command.toLowerCase()).chompLeft(trigger.toLowerCase()).s;
 
-            // Do all the things!
-            if(permissions.hasAccess(res.message.author.id, command)) {
-                switch(command) {
-                    case 'ping':
-                        this.reply(res, 'pong');
-                        break;
-                    case 'join':
-                        if(! arguement || arguement === ' ') {
-                            this.reply(res, 'No channel specified!');
-                            return;
-                        }
+            // Find containing module
+            let module = modules.search(command);
 
-                        // Try to find and join the channel
-                        res.message.channel.guild.channels.forEach(channel => {
-                            if(channel.name === arguement && channel.type === 'voice') {
-                                channel.join();
-                            }
-                        });
-                        break;
-                    case 'leave':
-                    case 'part':
-                        res.message.channel.guild.channels.forEach(channel => {
-                            if(channel.joined) {
-                                channel.leave();
-                            }
-                        });
-                        break;
-                    case 'afk':
-                        let afk_id = res.message.channel.guild.afk_channel_id;
+            // Prefix command
+            command = '_' + command;
 
-                        if(afk_id) {
-                            res.message.channel.guild.channels.forEach(channel => {
-                                if(channel.id === afk_id) {
-                                    channel.join();
-                                }
-                            });
-                        } else {
-                            res.message.channel.guild.channels.forEach(channel => {
-                                if(channel.joined) {
-                                    channel.leave();
-                                }
-                            });
-                        }
-                        break;
-                    case 'quit':
-                    case 'shutdown':
-                    case 'disconnect':
-                    case 'die':
-                    case 'goaway':
-                    case 'bye':
-                        logger.notify('info', 'Received exit command. Shutting down...');
-                        this.say(res, 'Bye!');
-                        GLOBAL.bot.disconnect();
-                        break;
-                    case '8ball':
-                        if(! arguement || arguement === ' ') {
-                            this.reply(res, 'You forgot to ask a question!');
-                            return;
-                        }
-
-                        let eightBall = require(GLOBAL.k9path + '/lib/modules/8ball.js');
-                        this.reply(res, eightBall.go());
-                        break;
-                    case 'nick':
-                    case 'nickname':
-                        if(! arguement || arguement === ' ') {
-                            this.reply(res, 'You forgot to give me a new name!');
-                            return;
-                        }
-                        GLOBAL.bot.User.edit(config.get('password'), arguement);
-                        break;
-                    case 'connect':
-                        if(! arguement || arguement === ' ') {
-                            this.reply(res, 'You forgot to provide an invite URL!');
-                            return;
-                        }
-
-                        if(! utils.parseInviteCode(arguement)) {
-                            this.reply(res, arguement + ' appears to be invalid!');
-                            return;
-                        }
-
-                        utils.connect(arguement);
-                        break;
-                }
+            // Run the command!
+            if(module) {
+                GLOBAL.k9modules[module][command](res, arguement);
             }
         });
-    }
-
-
-    /**
-     * Post message to channel
-     *
-     * @since       0.1.3
-     * @access      public
-     * @param       {object} res The message resource
-     * @param       {string} message The message to post
-     * @return      {void}
-     */
-    say(res, message) {
-        res.message.channel.sendTyping(res.message.channel.sendMessage(message));
-    }
-
-
-    /**
-     * Post message to user
-     *
-     * @since       0.1.3
-     * @access      public
-     * @param       {object} res The message resource
-     * @param       {string} message The message to post
-     * @return      {void}
-     */
-    reply(res, message) {
-        res.message.channel.sendTyping(res.message.reply(message));
     }
 }
 

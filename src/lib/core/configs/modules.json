@@ -1,3 +1,44 @@
 {
-  "8ball": false
+  "8ball": {
+    "enabled": true,
+    "commands": {
+      "8ball": {
+        "desc": "8 Ball",
+        "aliases": false
+      }
+    }
+  },
+  "core": {
+    "enabled": true,
+    "commands": {
+      "connect": {
+        "desc": "Connect",
+        "aliases": false
+      },
+      "join": {
+        "desc": "Join",
+        "aliases": false
+      },
+      "leave": {
+        "desc": "Leave",
+        "aliases": ["part"]
+      },
+      "afk": {
+        "desc": "AFK",
+        "aliases": false
+      },
+      "disconnect": {
+        "desc": "Disconnect",
+        "aliases": ["quit", "shutdown", "die", "goaway", "bye"]
+      },
+      "nickname": {
+        "desc": "Nickname",
+        "aliases": ["nick"]
+      },
+      "ping": {
+        "desc": "Ping",
+        "aliases": false
+      }
+    }
+  }
 }

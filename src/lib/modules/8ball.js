@@ -9,6 +9,9 @@
 'use strict';
 
 
+const utils  = require(GLOBAL.k9path + '/lib/core/utils.js');
+
+
 /**
  * 8-ball Module class
  *
@@ -18,23 +21,20 @@ class eightBall {
 
 
     /**
-     * Get things started!
-     *
-     * @since       0.1.3
-     * @access      public
-     * @return      {void}
-     */
-    constructor() {}
-
-
-    /**
      * Get a random response
      *
      * @since       0.1.3
      * @access      public
-     * @return      {string} response The response to return
+     * @param       {object} res The message resource
+     * @param       {string} arguements The command arguements
+     * @return      {void}
      */
-    go() {
+    _8ball(res, arguement) {
+        if(! arguement || arguement === ' ') {
+            utils.reply(res, 'You forgot to ask a question!');
+            return;
+        }
+
         let answers = [
             'It is certain',
             'It is decidedly so',
@@ -58,7 +58,7 @@ class eightBall {
             'Very doubtful'
         ];
 
-        return answers[Math.floor(Math.random()*answers.length)];
+        utils.reply(res, answers[Math.floor(Math.random()*answers.length)]);
     }
 }
 
