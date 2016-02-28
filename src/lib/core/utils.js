@@ -66,17 +66,24 @@ function isBotMessage(channel_id) {
  *
  * @since       0.1.4
  * @param       {string} filepath The path to check
+ * @param       {bool} isdir True to treat as directory
  * @return      {bool} exists True if exists, false otherwise
  */
-function fileExists(filepath) {
+function fileExists(filepath, isdir) {
     let fs     = require('fs');
     //let path   = require('path');
     let exists = false;
 
     if(filepath) {
-        try {
-            exists = fs.statSync(filepath).isFile();
-        } catch (e) {}
+        if(isdir) {
+            try {
+                exists = fs.statSync(filepath).isDirectory();
+            } catch (e) {}
+        } else {
+            try {
+                exists = fs.statSync(filepath).isFile();
+            } catch (e) {}
+        }
     }
 
     return exists;
