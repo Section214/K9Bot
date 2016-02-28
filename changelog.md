@@ -1,3 +1,10 @@
+## v0.1.4 / Thu, 28 Feb 2016
+* Ever really hate your name? Well now you can change it!
+* We're still learning, so lots of things are now done more intelligently than they were before (or so we think...)
+* We have this nifty logging setup... only it didn't work. Now it does.
+* K9 never really handled connections well... especially if you tried to make him connect to more than one server. Now he does that a bit better.
+* Also... K9 can now be told to join servers on demand!
+
 ## v0.1.3 / Thu, 25 Feb 2016
 * Know all those pesky little gremlins that find their way into code? Well now we handle them a bit better.
 * When K9 replies to you, it now shows the pretty little typing indicator... because who doesn't love shinies?
