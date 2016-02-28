@@ -1,4 +1,7 @@
-## v0.1.4 / Thu, 28 Feb 2016
+## v0.1.5 / Sun, 28 Feb 2016
+* This shouldn't really have been a separate update, but we forgot to add it... oh well, first step towards making things modular!
+
+## v0.1.4 / Sun, 28 Feb 2016
 * Ever really hate your name? Well now you can change it!
 * We're still learning, so lots of things are now done more intelligently than they were before (or so we think...)
 * We have this nifty logging setup... only it didn't work. Now it does.
