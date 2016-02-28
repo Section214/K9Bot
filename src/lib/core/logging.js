@@ -60,14 +60,27 @@ class logger {
             ]
         });
 
+        // Setup the transport for debug logging
+        this._d = new winston.Logger({
+            transports: [
+                new winston.transports.File({
+                    filename: 'logs/k9-' + moment().format('YYYY-MM-DD') + '.log',
+                    json: false,
+                    maxsize: 102400000
+                })
+            ]
+        });
+
         // Error handler
         process.on('uncaughtException', (err) => {
-            this._l.log('error', err.message);
+            this._c.log('error', err.message);
+            this._d.log('error', err);
             process.exit(0);
         });
 
         process.on('uncaughtException', (err) => {
-            this._l.log('error', err.message);
+            this._c.log('error', err.message);
+            this._d.log('error', err);
             process.exit(0);
         });
     }
