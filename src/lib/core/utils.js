@@ -29,20 +29,41 @@ function parseInviteCode(invite) {
 
 
 /**
- * Get the server name from an invite
+ * Join a server by invite
  *
- * @since       0.1.0
- * @return      {string} name The server name
+ * @since       0.0.3
+ * @access      public
+ * @param       {string} The invite code for the channel to join
+ * @return      {void}
+ * @todo        Don't forcibly re-accept every time!
  */
-function getServerName() {
-    let config    = require(GLOBAL.k9path + '/lib/core/config.js');
-    let server_id = config.get('last_server_id');
-    let server    = GLOBAL.bot.Guilds.get(server_id);
+function connect(invite) {
+    let config = require(GLOBAL.k9path + '/lib/core/config.js');
+    let logger = require(GLOBAL.k9path + '/lib/core/logging.js');
+    let utils  = require(GLOBAL.k9path + '/lib/core/utils.js');
 
-    if(server && server.name) {
-        return server.name;
+    if(! invite) {
+        invite = config.get('invite');
+    }
+
+    // Bail if no invite is set
+    if(! invite || invite === 'The invite URL for the server to connect to') {
+        logger.notify('error', 'Please create or edit the config/auth.json file and specify an invite URL!');
+        process.exit(0);
+    }
+
+    let code = utils.parseInviteCode(invite);
+
+    if(code === null) {
+        logger.notify('error', 'The specified invite link is invalid!');
+        process.exit(0);
     } else {
-        return null;
+        GLOBAL.bot.Invites.accept(code).then(function(res) {
+            logger.notify('info', 'Connected to ' + res.guild.name);
+        }, function() {
+            logger.notify('warn', 'The invite link was not accepted.');
+            return;
+        });
     }
 }
 
@@ -93,7 +114,6 @@ function fileExists(filepath, isdir) {
 module.exports = {
     parseInviteCode: parseInviteCode,
     connect:         connect,
-    getServerName:   getServerName,
     isBotMessage:    isBotMessage,
     fileExists:      fileExists
 };
