@@ -138,7 +138,7 @@ class command_processor {
      * @return      {void}
      */
     say(res, message) {
-        res.message.channel.sendTyping(res.message.sendMessage(message));
+        res.message.channel.sendTyping(res.message.channel.sendMessage(message));
     }
 
 
