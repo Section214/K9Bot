@@ -104,7 +104,6 @@ class command_processor {
                         logger.notify('info', 'Received exit command. Shutting down...');
                         this.say(res, 'Bye!');
                         GLOBAL.bot.disconnect();
-                        process.exit(0);
                         break;
                     case '8ball':
                         if(! arguement || arguement === ' ') {
