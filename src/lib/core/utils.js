@@ -92,7 +92,6 @@ function isBotMessage(channel_id) {
  */
 function fileExists(filepath, isdir) {
     let fs     = require('fs');
-    //let path   = require('path');
     let exists = false;
 
     if(filepath) {

@@ -25,13 +25,14 @@
 
 // Setup globals... the fewer the better!
 GLOBAL.k9version = '0.1.3';
-GLOBAL.k9path = __dirname;
-GLOBAL.bot = undefined;
+GLOBAL.k9path    = __dirname;
+GLOBAL.k9modules = ['core', 'management'];
+GLOBAL.bot       = undefined;
 
 // Load all the things!
-let semver = require('semver');
-let chalk = require('chalk');
-let logger = require('./lib/core/logging.js');
+let semver     = require('semver');
+let chalk      = require('chalk');
+let logger     = require('./lib/core/logging.js');
 let connection = require('./lib/core/connection.js');
 
 // Banner

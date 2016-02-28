@@ -40,7 +40,7 @@ class logger {
         this._c = new winston.Logger({
             transports: [
                 new winston.transports.Console({
-                    colorize: true,
+                    colorize: true
                 })
             ]
         });

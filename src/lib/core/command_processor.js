@@ -45,8 +45,9 @@ class command_processor {
 
             // Parse out any arguements
             command_string = command_string.split(' ');
-            let command   = command_string.reverse().pop();
-            let arguement = command_string.reverse().join(' ');
+            let command    = command_string.reverse().pop();
+            let arguement  = command_string.reverse().join(' ');
+
 
             // Strip trigger
             command = string(command.toLowerCase()).chompLeft(trigger.toLowerCase()).s;
