@@ -64,7 +64,7 @@ class logger {
         this._d = new winston.Logger({
             transports: [
                 new winston.transports.File({
-                    filename: 'logs/k9-' + moment().format('YYYY-MM-DD') + '.log',
+                    filename: 'logs/debug-' + moment().format('YYYY-MM-DD') + '.log',
                     json: false,
                     maxsize: 102400000
                 })
