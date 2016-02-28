@@ -92,6 +92,7 @@ function fileExists(filepath, isdir) {
 
 module.exports = {
     parseInviteCode: parseInviteCode,
+    connect:         connect,
     getServerName:   getServerName,
     isBotMessage:    isBotMessage,
     fileExists:      fileExists

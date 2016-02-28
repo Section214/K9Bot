@@ -91,24 +91,36 @@ class connection {
         // Connected!
         GLOBAL.bot.Dispatcher.on(Discordie.Events.GATEWAY_READY, err => {
             if(! err.error) {
-                let login_message = ' as ' + GLOBAL.bot.User.username;
-
                 // Save the login token
                 if(! token) {
                     config.set('token', GLOBAL.bot.token);
                     config.save('internal');
                 }
 
-                this.join();
+                logger.notify('info', 'Connected as ' + GLOBAL.bot.User.username);
 
-                // Display some server info
-                let server_name = utils.getServerName();
-
-                if(server_name) {
-                    login_message = ' to ' + server_name + login_message;
+                // Connect to default server
+                if(GLOBAL.bot.Guilds.size === 0) {
+                    utils.connect();
                 }
 
-                logger.notify('info', 'Connected' + login_message);
+                let connected_to = '';
+
+                if(GLOBAL.bot.Guilds.size === 1) {
+                    connected_to = 'Connected to ';
+
+                    GLOBAL.bot.Guilds.toArray().forEach(function(guild){
+                        connected_to = connected_to + guild.name;
+                    });
+                } else {
+                    connected_to = 'Connected to:';
+
+                    GLOBAL.bot.Guilds.toArray().forEach(function(guild){
+                        connected_to = connected_to + '\n' + '        + ' + guild.name;
+                    });
+                }
+
+                logger.notify('info', connected_to);
 
                 // Check/process first run configuration
                 require(GLOBAL.k9path + '/lib/core/firstrun.js');
@@ -127,55 +139,12 @@ class connection {
             let sdelay = Math.floor(delay/100)/10;
 
             if(err.error.message.indexOf('gateway') >= 0) {
-                logger.notify('warning', 'Disconnected from gateway, reconnecting in ' + sdelay + ' seconds');
+                logger.notify('warn', 'Disconnected from gateway, reconnecting in ' + sdelay + ' seconds');
             } else {
-                logger.notify('warning', 'Failed to login or get gateway, reconnecting in ' + sdelay + ' seconds');
+                logger.notify('warn', 'Failed to login or get gateway, reconnecting in ' + sdelay + ' seconds');
             }
             setTimeout(this.connect, delay);
         });
-    }
-
-
-    /**
-     * Join a channel by invite
-     *
-     * @since       0.0.3
-     * @access      public
-     * @param       {string} The invite code for the channel to join
-     * @return      {void}
-     * @todo        Don't forcibly re-accept every time!
-     */
-    join(invite) {
-        let last_server = config.get('last_server_invite');
-
-        if(! invite) {
-            invite = config.get('invite');
-        }
-
-        if(! last_server || last_server !== invite) {
-            // Bail if no invite is set
-            if(! invite || invite === 'The invite URL for the server to connect to') {
-                logger.notify('error', 'Please create or edit the config/auth.json file and specify an invite URL!');
-                process.exit(0);
-            }
-
-            let code = utils.parseInviteCode(invite);
-
-            if(code === null) {
-                logger.notify('error', 'The specified invite link is invalid!');
-                process.exit(0);
-            } else {
-                GLOBAL.bot.Invites.accept(code).then(function(res) {
-                    // Store last server so we don't have to re-accept all the time
-                    config.set('last_server_invite', invite);
-                    config.set('last_server_id', res.guild.id);
-                    config.save('internal');
-                }, function() {
-                    logger.notify('warning', 'The invite link was not accepted.');
-                    process.exit(0);
-                });
-            }
-        }
     }
 }
 

@@ -122,6 +122,19 @@ class command_processor {
                         }
                         GLOBAL.bot.User.edit(config.get('password'), arguement);
                         break;
+                    case 'connect':
+                        if(! arguement || arguement === ' ') {
+                            this.reply(res, 'You forgot to provide an invite URL!');
+                            return;
+                        }
+
+                        if(! utils.parseInviteCode(arguement)) {
+                            this.reply(res, arguement + ' appears to be invalid!');
+                            return;
+                        }
+
+                        utils.connect(arguement);
+                        break;
                 }
             }
         });
