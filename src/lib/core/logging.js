@@ -75,13 +75,13 @@ class logger {
         process.on('uncaughtException', (err) => {
             this._c.log('error', err.message);
             this._d.log('error', err);
-            process.exit(0);
+            process.exit(1);
         });
 
-        process.on('uncaughtException', (err) => {
+        process.on('unhandledRejection', (err) => {
             this._c.log('error', err.message);
             this._d.log('error', err);
-            process.exit(0);
+            process.exit(1);
         });
     }
 
