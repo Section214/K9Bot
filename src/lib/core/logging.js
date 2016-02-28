@@ -55,8 +55,7 @@ class logger {
                 new winston.transports.File({
                     filename: 'logs/k9-' + moment().format('YYYY-MM-DD') + '.log',
                     json: false,
-                    maxsize: 102400000,
-                    zippedArchive: true
+                    maxsize: 102400000
                 })
             ]
         });
