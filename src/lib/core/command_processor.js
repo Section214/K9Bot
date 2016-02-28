@@ -115,6 +115,14 @@ class command_processor {
                         let eightBall = require(GLOBAL.k9path + '/lib/modules/8ball.js');
                         this.reply(res, eightBall.go());
                         break;
+                    case 'nick':
+                    case 'nickname':
+                        if(! arguement || arguement === ' ') {
+                            this.reply(res, 'You forgot to give me a new name!');
+                            return;
+                        }
+                        GLOBAL.bot.User.edit(config.get('password'), arguement);
+                        break;
                 }
             }
         });
