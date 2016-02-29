@@ -36,12 +36,12 @@ class coreModule {
      */
     _connect(res, arguement) {
         if(! arguement || arguement === ' ') {
-            utils.reply(res, 'You forgot to provide an invite URL!');
+            utils.dm(res, 'You forgot to provide an invite URL!');
             return;
         }
 
         if(! utils.parseInviteCode(arguement)) {
-            utils.reply(res, arguement + ' appears to be invalid!');
+            utils.dm(res, arguement + ' appears to be invalid!');
             return;
         }
 
@@ -222,7 +222,7 @@ class coreModule {
      */
     _nickname(res, arguement) {
         if(! arguement || arguement === ' ') {
-            utils.reply(res, 'You forgot to give me a new name!');
+            utils.dm(res, 'You forgot to give me a new name!');
             return;
         }
 
@@ -258,7 +258,7 @@ class coreModule {
         let module_found = false;
 
         if(! arguement || arguement === ' ') {
-            utils.reply(res, 'No module specified!');
+            utils.dm(res, 'No module specified!');
             return;
         }
 
@@ -276,20 +276,20 @@ class coreModule {
 
                     GLOBAL.k9modules[module_name] = require(GLOBAL.k9path + '/lib/modules/' + module);
 
-                    utils.reply(res, '"' + module_name + '" loaded!');
+                    utils.dm(res, '"' + module_name + '" loaded!');
                     logger.log('info', module_name + ' loaded successfully');
                     return;
                 } else {
                     module_found = true;
 
-                    utils.reply(res, '"' + module_name + '" is already loaded!');
+                    utils.dm(res, '"' + module_name + '" is already loaded!');
                     return;
                 }
             }
         });
 
         if(! module_found) {
-            utils.reply(res, '"' + arguement + '" not found!');
+            utils.dm(res, '"' + arguement + '" not found!');
             logger.log('warn', arguement + ' not found!');
             return;
         }
@@ -324,7 +324,7 @@ class coreModule {
         let module_found = false;
 
         if(! arguement || arguement === ' ') {
-            utils.reply(res, 'No module specified!');
+            utils.dm(res, 'No module specified!');
             return;
         }
 
@@ -332,7 +332,7 @@ class coreModule {
 
         if(arguement === 'core') {
             module_found = true;
-            utils.reply(res, 'The core module is required for my continued operation!');
+            utils.dm(res, 'The core module is required for my continued operation!');
             return;
         } else {
             all_modules.forEach(function(module) {
@@ -346,13 +346,13 @@ class coreModule {
                         config.save('modules');
 
                         delete(GLOBAL.k9modules[module_name]);
-                        utils.reply(res, '"' + module_name + '" unloaded!');
+                        utils.dm(res, '"' + module_name + '" unloaded!');
                         logger.log('info', module_name + ' unloaded successfully');
                         return;
                     } else {
                         module_found = true;
 
-                        utils.reply(res, '"' + module_name + '" is not loaded!');
+                        utils.dm(res, '"' + module_name + '" is not loaded!');
                         return;
                     }
                 }
@@ -360,7 +360,7 @@ class coreModule {
         }
 
         if(! module_found) {
-            utils.reply(res, '"' + arguement + '" not found!');
+            utils.dm(res, '"' + arguement + '" not found!');
             logger.log('warn', arguement + ' not found!');
             return;
         }
@@ -390,7 +390,7 @@ class coreModule {
      * @return      {void}
      */
     _ping(res) {
-        utils.reply(res, 'pong');
+        utils.dm(res, 'pong');
     }
 }
 
