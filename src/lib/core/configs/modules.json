@@ -45,6 +45,10 @@
           "nick"
         ]
       },
+      "modules": {
+        "desc": "Modules",
+        "aliases": false
+      },
       "load": {
         "desc": "Load",
         "aliases": [

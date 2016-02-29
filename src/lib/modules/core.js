@@ -245,6 +245,35 @@ class coreModule {
 
 
     /**
+     * List all modules
+     *
+     * @since       0.1.6
+     * @access      public
+     * @param       {object} res The message resource
+     * @return      {void}
+     */
+    _modules(res) {
+        let module_name = '';
+        let module_list = '';
+
+        all_modules.forEach(function(module) {
+            module_name = string(module).strip('.js').s;
+
+            if(module_name !== 'core') {
+                if(config.get('modules', module_name + ':enabled')) {
+                    module_list = module_list + '[+] ' + module_name + '\n';
+                } else {
+                    module_list = module_list + '[-] ' + module_name + '\n';
+                }
+            }
+        });
+
+        utils.dm(res, 'Available modules:\n```' + module_list + '```');
+        return;
+    }
+
+
+    /**
      * Load a module
      *
      * @since       0.1.6
