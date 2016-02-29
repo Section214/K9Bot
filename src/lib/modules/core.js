@@ -154,7 +154,7 @@ class coreModule {
     /**
      * Display help
      *
-     * @since       0.1.6
+     * @since       1.0.0
      * @access      public
      * @param       {object} res The message resource
      * @return      {void}

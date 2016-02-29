@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       0.1.6
+ * @since       1.0.0
  */
 
 'use strict';
@@ -12,7 +12,7 @@
 /**
  * Urban Dictionary Module class
  *
- * @since       0.1.6
+ * @since       1.0.0
  */
 class urban {
 
@@ -20,7 +20,7 @@ class urban {
     /**
      * Get an Urban Dictionary definition
      *
-     * @since       0.1.6
+     * @since       1.0.0
      * @access      public
      * @param       {object} res The message resource
      * @param       {string} arguements The command arguements

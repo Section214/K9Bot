@@ -28,7 +28,7 @@ class ownerModule {
     /**
      * Check if the person requesting this is the bot owner!
      *
-     * @since       0.1.6
+     * @since       1.0.0
      * @access      public
      * @param       {object} res The message resource
      * @return      {void}
@@ -160,7 +160,7 @@ class ownerModule {
     /**
      * List all modules
      *
-     * @since       0.1.6
+     * @since       1.0.0
      * @access      public
      * @param       {object} res The message resource
      * @return      {void}
@@ -205,7 +205,7 @@ class ownerModule {
     /**
      * Load a module
      *
-     * @since       0.1.6
+     * @since       1.0.0
      * @access      public
      * @param       {object} res The message resource
      * @param       {string} arguements The command arguements
@@ -275,7 +275,7 @@ class ownerModule {
     /**
      * Unload a module
      *
-     * @since       0.1.6
+     * @since       1.0.0
      * @access      public
      * @param       {object} res The message resource
      * @param       {string} arguements The command arguements

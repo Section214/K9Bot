@@ -113,7 +113,7 @@ function fileExists(filepath, isdir) {
 /**
  * Get commands
  *
- * @since       0.1.6
+ * @since       1.0.0
  * @access      public
  * @param       {string} module The module to get commands for
  * @return      {string} command_string The command string

@@ -3,7 +3,7 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @since       0.1.6
+ * @since       1.0.0
  */
 
 'use strict';
@@ -17,7 +17,7 @@ const utils     = require(GLOBAL.k9path + '/lib/core/utils.js');
 /**
  * Weather Module class
  *
- * @since       0.1.6
+ * @since       1.0.0
  */
 class weather {
 
@@ -25,7 +25,7 @@ class weather {
     /**
      * Get the weather
      *
-     * @since       0.1.6
+     * @since       1.0.0
      * @access      public
      * @param       {object} res The message resource
      * @param       {string} arguements The command arguements
