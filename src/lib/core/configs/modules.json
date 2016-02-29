@@ -11,10 +11,6 @@
   "core": {
     "enabled": true,
     "commands": {
-      "connect": {
-        "desc": "Connect",
-        "aliases": false
-      },
       "join": {
         "desc": "Join",
         "aliases": false
@@ -29,6 +25,25 @@
         "desc": "AFK",
         "aliases": false
       },
+      "nickname": {
+        "desc": "Nickname",
+        "aliases": [
+          "nick"
+        ]
+      },
+      "ping": {
+        "desc": "Ping",
+        "aliases": false
+      }
+    }
+  },
+  "owner": {
+    "enabled": true,
+    "commands": {
+      "connect": {
+        "desc": "Connect",
+        "aliases": false
+      },
       "disconnect": {
         "desc": "Disconnect",
         "aliases": [
@@ -37,12 +52,6 @@
           "die",
           "goaway",
           "bye"
-        ]
-      },
-      "nickname": {
-        "desc": "Nickname",
-        "aliases": [
-          "nick"
         ]
       },
       "modules": {
@@ -60,10 +69,6 @@
         "aliases": [
           "disable"
         ]
-      },
-      "ping": {
-        "desc": "Ping",
-        "aliases": false
       }
     }
   },
