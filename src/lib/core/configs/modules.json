@@ -58,5 +58,14 @@
         "aliases": false
       }
     }
+  },
+  "urban": {
+    "enabled": true,
+    "commands": {
+      "urban": {
+        "desc": "Urban Dictionary",
+        "aliases": false
+      }
+    }
   }
 }
