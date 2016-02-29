@@ -1,3 +1,5 @@
 {
-  "trigger": "The key or string used to identify bot commands (we recommend !)"
+  "trigger": "The key or string used to identify bot commands (we recommend !)",
+  "giphy_api_key": "Giphy API key. If blank, we'll use the beta API key",
+  "giphy_rating": "limit Giphy by rating (y, g, pg, pg-13 or r)"
 }
