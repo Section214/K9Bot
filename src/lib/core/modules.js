@@ -36,10 +36,10 @@ class modules {
         all_modules.forEach(function(module) {
             module_name = string(module).strip('.js').s;
 
-            if(module_name === 'core' || module_name === 'management') {
+            if(module_name === 'core' || module_name === 'owner') {
                 GLOBAL.k9modules[module_name] = require(GLOBAL.k9path + '/lib/modules/' + module);
             } else {
-                if(config.get('modules', module_name + ':enabled')) {
+                if(config.get('modules', module_name + ':enabled') === true) {
                     GLOBAL.k9modules[module_name] = require(GLOBAL.k9path + '/lib/modules/' + module);
                 }
             }

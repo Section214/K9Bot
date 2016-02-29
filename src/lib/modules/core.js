@@ -198,7 +198,7 @@ class coreModule {
             module_name = string(module).strip('.js').s;
 
             if(module_name !== 'core' && module_name !== 'owner') {
-                if(config.get('modules', module_name + ':enabled')) {
+                if(config.get('modules', module_name + ':enabled') === true) {
                     command_list = command_list + utils.getCommands(module_name);
                 } else {
                     inactive = inactive + module_name + ', ';
