@@ -42,9 +42,9 @@ class connection {
      * @return      {bool} True if connected successfully, false otherwise
      */
      connect() {
-        let email      = config.get('email');
-        let password   = config.get('password');
-        let token      = config.get('token');
+        let email      = config.get('auth', 'email');
+        let password   = config.get('auth', 'password');
+        let token      = config.get('internal', 'token');
         let login_type = 'password';
 
         // Can we login with a token?
@@ -93,7 +93,7 @@ class connection {
             if(! err.error) {
                 // Save the login token
                 if(! token) {
-                    config.set('token', GLOBAL.bot.token);
+                    config.set('internal', 'token', GLOBAL.bot.token);
                     config.save('internal');
                 }
 

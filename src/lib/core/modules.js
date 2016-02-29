@@ -39,7 +39,7 @@ class modules {
             if(module_name === 'core' || module_name === 'management') {
                 GLOBAL.k9modules[module_name] = require(GLOBAL.k9path + '/lib/modules/' + module);
             } else {
-                if(config.get(module_name + ':enabled')) {
+                if(config.get('modules', module_name + ':enabled')) {
                     GLOBAL.k9modules[module_name] = require(GLOBAL.k9path + '/lib/modules/' + module);
                 }
             }
@@ -64,14 +64,14 @@ class modules {
         all_modules.forEach(function(module) {
             module_name = string(module).strip('.js').s;
 
-            if(config.get(module_name + ':enabled')) {
-                module_commands = config.get(module_name + ':commands');
+            if(config.get('modules', module_name + ':enabled')) {
+                module_commands = config.get('modules', module_name + ':commands');
 
                 if(module_commands.hasOwnProperty(command)) {
                     status = module_name;
                 } else {
                     for(module_command in module_commands) {
-                        aliases = config.get(module_name + ':commands:' + module_command + ':aliases');
+                        aliases = config.get('modules', module_name + ':commands:' + module_command + ':aliases');
 
                         if(aliases) {
                             aliases.forEach(function(alias) {

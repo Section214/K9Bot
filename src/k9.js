@@ -26,6 +26,7 @@
 // Setup globals... the fewer the better!
 GLOBAL.k9version = '0.1.5';
 GLOBAL.k9path    = __dirname;
+GLOBAL.k9configs = {};
 GLOBAL.k9modules = {};
 GLOBAL.bot       = undefined;
 

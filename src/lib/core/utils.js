@@ -43,7 +43,7 @@ function connect(invite) {
     let utils  = require(GLOBAL.k9path + '/lib/core/utils.js');
 
     if(! invite) {
-        invite = config.get('invite');
+        invite = config.get('config', 'invite');
     }
 
     // Bail if no invite is set

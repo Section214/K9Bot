@@ -29,8 +29,8 @@ class giphy {
     _giphy(res, arguement) {
         let utils   = require(GLOBAL.k9path + '/lib/core/utils.js');
         let config  = require(GLOBAL.k9path + '/lib/core/config.js');
-        let api_key = config.get('giphy_api_key', '');
-        let rating  = config.get('giphy_rating', false);
+        let api_key = config.get('config', 'giphy_api_key', '');
+        let rating  = config.get('config', 'giphy_rating', false);
         let giphy   = require('giphy-api')(api_key);
 
         if(! arguement || arguement === ' ') {

@@ -227,7 +227,7 @@ class coreModule {
             return;
         }
 
-        GLOBAL.bot.User.edit(config.get('password'), arguement);
+        GLOBAL.bot.User.edit(config.get('auth', 'password'), arguement);
     }
 
 
@@ -290,7 +290,7 @@ class coreModule {
                 if(module_name === arguement) {
                     module_found = true;
 
-                    config.set(module_name + ':enabled', false);
+                    config.set('modules', module_name + ':enabled', false);
                     config.save('modules');
 
                     delete(GLOBAL.k9modules[module_name]);

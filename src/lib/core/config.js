@@ -17,10 +17,10 @@ const core_configs = path.join(GLOBAL.k9path, '/lib/core/configs/');
 
 // Define the available config files
 const configs = {
-    'internal': 'internal.json',
-    'modules': 'modules.json',
-    'auth': 'auth.json',
-    'config': 'config.json'
+    'internal': core_configs + 'internal.json',
+    'modules': core_configs + 'modules.json',
+    'auth': user_configs + 'auth.json',
+    'config': user_configs + 'config.json'
 };
 
 
@@ -41,20 +41,10 @@ class config {
      */
     constructor() {
         Object.keys(configs).forEach(function(key) {
-            if(utils.fileExists(user_configs + configs[key])) {
-                nconf.file(key, {
-                    file: user_configs + configs[key]
-                });
-            } else {
-                if(utils.fileExists(core_configs + configs[key])) {
-                    nconf.file(key, {
-                        file: core_configs + configs[key]
-                    });
-                } else {
-                    logger.log('error', 'Config file ' + configs[key] + ' not found!');
-                    return;
-                }
-            }
+            GLOBAL.k9configs[key] = new nconf.Provider();
+            GLOBAL.k9configs[key].file(key, {
+                file: configs[key]
+            });
         });
     }
 
@@ -68,8 +58,8 @@ class config {
      * @param       {*} fallback - An optional fallback value
      * @return      {*} val - The value of the retrieved key
      */
-    get(key, fallback) {
-        let val = nconf.get(key);
+    get(store, key, fallback) {
+        let val = GLOBAL.k9configs[store].get(key);
 
         if(! val) {
             val = fallback;
@@ -88,8 +78,8 @@ class config {
      * @param       {*} value - The value to set
      * @return      {bool} True if set succeeded, false otherwise
      */
-    set(key, value) {
-        return nconf.set(key, value);
+    set(store, key, value) {
+        return GLOBAL.k9configs[store].set(key, value);
     }
 
 
@@ -101,9 +91,9 @@ class config {
      * @param       {bool} save - Whether or not to save before reloading
      * @return      {bool} True if reload succeeded, false otherwise
      */
-    reload(save) {
+    reload(store, save) {
         if(save) {
-            this.save();
+            this.save(store);
         }
 
         return nconf.reset();
@@ -121,30 +111,11 @@ class config {
     save(handle) {
         if(handle) {
             if(configs.hasOwnProperty(handle)) {
-                if(utils.fileExists(user_configs + configs[handle])) {
-                    nconf.save(user_configs + configs[handle], function (err) {
-                        if(err) {
-                            logger.log('error', err.message);
-                            return;
-                        }
-
-                        logger.notify('info', 'Configuration saved successfully.');
-                    });
-                } else {
-                    if(utils.fileExists(core_configs + configs[handle])) {
-                        nconf.save(core_configs + configs[handle], function (err) {
-                            if(err) {
-                                logger.log('error', err.message);
-                                return;
-                            }
-
-                            logger.notify('info', 'Configuration saved successfully.');
-                        });
-                    } else {
-                        logger.log('error', 'Config file ' + configs[handle] + ' not found!');
-                        return;
-                    }
-                }
+                GLOBAL.k9configs[handle].save();
+                logger.notify('info', 'Configuration saved successfully.');
+            } else {
+                logger.log('error', 'Config file ' + configs[handle] + ' not found!');
+                return;
             }
         } else {
             logger.log('silly', 'No config file specified!');
