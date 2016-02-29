@@ -130,7 +130,7 @@ function getCommands(module) {
     commands = config.get('modules', module + ':commands');
 
     for(command in commands) {
-        command_string = command_string + '*/' + command;
+        command_string = command_string + '*' + config.get('config', 'trigger', '!') + command;
 
         if(commands[command].param) {
             command_string = command_string + ' <' + commands[command].param + '>';
@@ -142,7 +142,7 @@ function getCommands(module) {
             command_string = command_string + '\n\t\tAliases:';
 
             commands[command].aliases.forEach(function(alias) {
-                command_string = command_string + ' /' + alias + ', ';
+                command_string = command_string + ' ' + config.get('config', 'trigger', '!') + alias + ', ';
             });
 
             command_string = string(command_string).chompRight(', ').s;
