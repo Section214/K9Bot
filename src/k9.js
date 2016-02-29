@@ -40,7 +40,8 @@ let connection = require('./lib/core/connection.js');
 console.log(chalk.bold('\nK9 - A flexible, modular bot for the Discord chat service'));
 console.log('=========================================================');
 console.log(chalk.bold.blue('Version') + '          ' + GLOBAL.k9version);
-console.log(chalk.bold.blue('Homepage') + '         http://section214.com/product/k9');
+console.log(chalk.bold.blue('Homepage') + '         https://www.npmjs.com/package/k9bot');
+console.log(chalk.bold.blue('Wiki') + '             https://github.com/Section214/K9Bot/wiki');
 console.log(chalk.bold.blue('Author') + '           Daniel J Griffiths\n                 <dgriffiths@section214.com>');
 console.log('=========================================================');
 
