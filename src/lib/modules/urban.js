@@ -37,7 +37,7 @@ class urban {
         let response = urban(arguement);
 
         response.first(function(json) {
-            utils.reply(res, "\"" + json.word + "\" is defined as \"" + json.definition + "\"\nExample: \"" + json.example + "\"");
+            utils.reply(res, '\"' + json.word + '" is defined as "' + json.definition + '"\nExample: "' + json.example + '"');
             return;
         });
     }

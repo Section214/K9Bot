@@ -42,7 +42,7 @@ class weather {
             degreeType: 'F'
         }, function(err, response) {
             if(err) {
-                utils.reply(res, "Skies are cloudy... just kidding. Weather forecasting is currently offline.");
+                utils.reply(res, 'Skies are cloudy... just kidding. Weather forecasting is currently offline.');
                 return;
             }
 
@@ -51,8 +51,7 @@ class weather {
             let tempc    = conv.f2c(tempf);
             let desc     = response[0].current.skytext.toLowerCase();
 
-            utils.reply(res, "The weather in " + location + " is currently " + tempf + "°F/" + tempc + "°C and " + desc );
-            console.log(response[0]);
+            utils.reply(res, 'The weather in ' + location + ' is currently ' + tempf + '°F/' + tempc + '°C and ' + desc );
         });
     }
 }

@@ -43,7 +43,7 @@ class giphy {
             fmt: 'json'
         }, function(err, img) {
             if(err) {
-                utils.reply(res, "Oh my Giphy! Something went wrong...");
+                utils.reply(res, 'Oh my Giphy! Something went wrong...');
                 return;
             }
 
