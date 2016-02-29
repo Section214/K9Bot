@@ -9,9 +9,13 @@
 'use strict';
 
 
-const utils  = require(GLOBAL.k9path + '/lib/core/utils.js');
-const config = require(GLOBAL.k9path + '/lib/core/config.js');
-const logger = require(GLOBAL.k9path + '/lib/core/logging.js');
+const fs          = require('fs');
+const string      = require('string');
+const utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
+const config      = require(GLOBAL.k9path + '/lib/core/config.js');
+const logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
+const modules     = require(GLOBAL.k9path + '/lib/core/modules.js');
+const all_modules = fs.readdirSync(GLOBAL.k9path + '/lib/modules');
 
 
 /**
@@ -214,6 +218,7 @@ class coreModule {
      * @since       0.1.5
      * @access      public
      * @param       {object} res The message resource
+     * @param       {string} arguements The command arguements
      * @return      {void}
      */
     _nickname(res, arguement) {
@@ -222,7 +227,7 @@ class coreModule {
             return;
         }
 
-        GLOBAL.bot.User.edit(config.get('password'), arguement);
+        GLOBAL.bot.User.edit(config.get('auth', 'password'), arguement);
     }
 
 
@@ -232,10 +237,75 @@ class coreModule {
      * @since       0.1.5
      * @access      public
      * @param       {object} res The message resource
+     * @param       {string} arguements The command arguements
      * @return      {void}
      */
     _nick(res, arguement) {
         this.nickname(res, arguement);
+    }
+
+
+    /**
+     * Load a module
+     *
+     * @since       0.1.6
+     * @access      public
+     * @param       {object} res The message resource
+     * @param       {string} arguements The command arguements
+     * @return      {void}
+     */
+    _load(res, arguement) {
+
+    }
+
+
+    /**
+     * Unload a module
+     *
+     * @since       0.1.6
+     * @access      public
+     * @param       {object} res The message resource
+     * @param       {string} arguements The command arguements
+     * @return      {void}
+     */
+    _unload(res, arguement) {
+        let module_name  = '';
+        let module_found = false;
+
+        if(! arguement || arguement === ' ') {
+            utils.reply(res, 'No module specified!');
+            return;
+        }
+
+        arguement = arguement.toLowerCase();
+
+        if(arguement === 'core') {
+            module_found = true;
+            utils.reply(res, 'The core module is required for my continued operation!');
+            return;
+        } else {
+            all_modules.forEach(function(module) {
+                module_name = string(module).strip('.js').s;
+
+                if(module_name === arguement) {
+                    module_found = true;
+
+                    config.set('modules', module_name + ':enabled', false);
+                    config.save('modules');
+
+                    delete(GLOBAL.k9modules[module_name]);
+                    utils.reply(res, '"' + module_name + '" unloaded!');
+                    logger.log('info', module_name + ' unloaded successfully');
+                    return;
+                }
+            });
+        }
+
+        if(! module_found) {
+            utils.reply(res, '"' + arguement + '" not found!');
+            logger.log('warn', arguement + ' not found!');
+            return;
+        }
     }
 
 

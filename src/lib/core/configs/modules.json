@@ -35,6 +35,14 @@
         "desc": "Nickname",
         "aliases": ["nick"]
       },
+      "load": {
+        "desc": "Load",
+        "aliases": false
+      },
+      "unload": {
+        "desc": "Unload",
+        "aliases": false
+      },
       "ping": {
         "desc": "Ping",
         "aliases": false
