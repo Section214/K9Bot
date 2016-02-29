@@ -18,13 +18,13 @@
  *
  * @author      Daniel J Griffiths <dgriffiths@section214.com>
  * @license     GPL-2.0
- * @version     1.0.0
+ * @version     1.0.1
  */
 
 'use strict';
 
 // Setup globals... the fewer the better!
-GLOBAL.k9version = '1.0.0';
+GLOBAL.k9version = '1.0.1';
 GLOBAL.k9path    = __dirname;
 GLOBAL.k9configs = {};
 GLOBAL.k9modules = {};

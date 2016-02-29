@@ -1,3 +1,6 @@
+## v1.0.1 / Mon, 29 Feb 2016
+* Since K9 is actually a thing now, figured we should add an about command.
+
 ## v1.0.0 / Mon, 29 Feb 2016
 * Yay! We made it to our first stable release!
 * GIFs are awesome, so we added a Giphy module to make all your channels geferific (is that a word? I think we made up a word...)!
