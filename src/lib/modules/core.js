@@ -9,12 +9,8 @@
 'use strict';
 
 
-const fs          = require('fs');
-const string      = require('string');
 const utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
 const config      = require(GLOBAL.k9path + '/lib/core/config.js');
-const logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
-const all_modules = fs.readdirSync(GLOBAL.k9path + '/lib/modules');
 
 
 /**
