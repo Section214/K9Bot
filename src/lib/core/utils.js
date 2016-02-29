@@ -120,7 +120,8 @@ function fileExists(filepath, isdir) {
  * @return      {void}
  */
 function say(res, message) {
-    res.message.channel.sendTyping(res.message.channel.sendMessage(message));
+    res.message.channel.sendTyping();
+    res.message.channel.sendMessage(message);
 }
 
 
@@ -134,7 +135,8 @@ function say(res, message) {
  * @return      {void}
  */
 function reply(res, message) {
-    res.message.channel.sendTyping(res.message.reply(message));
+    res.message.channel.sendTyping();
+    res.message.reply(message);
 }
 
 
