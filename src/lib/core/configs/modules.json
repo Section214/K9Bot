@@ -41,6 +41,11 @@
         "param": false,
         "aliases": false
       },
+      "about": {
+        "desc": "Displays information about me!",
+        "param": false,
+        "aliases": false
+      },
       "help": {
         "desc": "This. If that isn't enough of a description, you probably need more of it than I can give.",
         "param": false,

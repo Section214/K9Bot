@@ -152,6 +152,27 @@ class coreModule {
 
 
     /**
+     * Display about
+     *
+     * @since       1.0.1
+     * @access      public
+     * @param       {object} res The message resource
+     * @return      {void}
+     */
+    _about(res) {
+        let about_message = '__**K9 - A flexible, modular bot for the Discord chat service**__\n';
+        about_message = about_message + '**Version:** ' + GLOBAL.k9version + '\n';
+        about_message = about_message + '**Homepage:** https://www.npmjs.com/package/k9bot\n';
+        about_message = about_message + '**Wiki:** https://github.com/Section214/K9Bot/wiki\n';
+        about_message = about_message + '`"We are in a car.`"';
+
+
+        utils.dm(res, about_message);
+        return;
+    }
+
+
+    /**
      * Display help
      *
      * @since       1.0.0
