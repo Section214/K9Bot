@@ -3,7 +3,8 @@
     "enabled": false,
     "commands": {
       "8ball": {
-        "desc": "8 Ball",
+        "desc": "Ask the magic 8-ball a question and find out your future!",
+        "param": "question",
         "aliases": false
       }
     }
@@ -12,27 +13,37 @@
     "enabled": true,
     "commands": {
       "join": {
-        "desc": "Join",
+        "desc": "Tells me to join the given channel.",
+        "param": "channel_name",
         "aliases": false
       },
       "leave": {
-        "desc": "Leave",
+        "desc": "Tells me to leave the currently active channel.",
+        "param": false,
         "aliases": [
           "part"
         ]
       },
       "afk": {
-        "desc": "AFK",
+        "desc": "Tells me to join the server AFK channel if it is set, or leave the active channel if no AFK channel is defined.",
+        "param": false,
         "aliases": false
       },
       "nickname": {
-        "desc": "Nickname",
+        "desc": "Tells me to change my nickname... not sure why you don't like my name though.",
+        "param": "new_nickname",
         "aliases": [
           "nick"
         ]
       },
       "ping": {
-        "desc": "Ping",
+        "desc": "Ping pong... duh!",
+        "param": false,
+        "aliases": false
+      },
+      "help": {
+        "desc": "This. If that isn't enough of a description, you probably need more of it than I can give.",
+        "param": false,
         "aliases": false
       }
     }
@@ -41,11 +52,13 @@
     "enabled": true,
     "commands": {
       "connect": {
-        "desc": "Connect",
+        "desc": "Tells me to connect to a given Discord server.",
+        "param": "invite_url",
         "aliases": false
       },
       "disconnect": {
-        "desc": "Disconnect",
+        "desc": "Tells me to go away :(",
+        "param": false,
         "aliases": [
           "quit",
           "shutdown",
@@ -55,17 +68,20 @@
         ]
       },
       "modules": {
-        "desc": "Modules",
+        "desc": "Lists all available modules.",
+        "param": false,
         "aliases": false
       },
       "load": {
-        "desc": "Load",
+        "desc": "Tells me to load a given module.",
+        "param": "module_name",
         "aliases": [
           "enable"
         ]
       },
       "unload": {
-        "desc": "Unload",
+        "desc": "Tells me to unload a given module.",
+        "param": "module_name",
         "aliases": [
           "disable"
         ]
@@ -76,7 +92,8 @@
     "enabled": false,
     "commands": {
       "giphy": {
-        "desc": "Giphy",
+        "desc": "Gets a random Giphy image for a given keyword.",
+        "param": "keyword",
         "aliases": false
       }
     }
@@ -85,7 +102,8 @@
     "enabled": false,
     "commands": {
       "weather": {
-        "desc": "Weather",
+        "desc": "Gets the weather for a given location.",
+        "param": "location",
         "aliases": false
       }
     }
@@ -94,7 +112,8 @@
     "enabled": false,
     "commands": {
       "urban": {
-        "desc": "Urban Dictionary",
+        "desc": "Gets a definition from Urban Dictionary.",
+        "param": "whatever",
         "aliases": false
       }
     }

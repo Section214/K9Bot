@@ -111,6 +111,53 @@ function fileExists(filepath, isdir) {
 
 
 /**
+ * Get commands
+ *
+ * @since       0.1.6
+ * @access      public
+ * @param       {string} module The module to get commands for
+ * @return      {string} command_string The command string
+ */
+function getCommands(module) {
+    let string         = require('string');
+    let config         = require(GLOBAL.k9path + '/lib/core/config.js');
+    let command_string = '';
+    let commands;
+    let command;
+
+    command_string = command_string + '**Module: ' + module + '**\n';
+
+    commands = config.get('modules', module + ':commands');
+
+    for(command in commands) {
+        command_string = command_string + '*/' + command;
+
+        if(commands[command].param) {
+            command_string = command_string + ' <' + commands[command].param + '>';
+        }
+
+        command_string = command_string + '*\n\t\t' + commands[command].desc;
+
+        if(commands[command].aliases) {
+            command_string = command_string + '\n\t\tAliases:';
+
+            commands[command].aliases.forEach(function(alias) {
+                command_string = command_string + ' /' + alias + ', ';
+            });
+
+            command_string = string(command_string).chompRight(', ').s;
+        }
+
+        command_string = command_string + '\n';
+    }
+
+    command_string = command_string + '\n';
+
+    return command_string;
+}
+
+
+/**
  * Post message to channel
  *
  * @since       0.1.3
@@ -164,6 +211,7 @@ module.exports = {
     connect:         connect,
     isBotMessage:    isBotMessage,
     fileExists:      fileExists,
+    getCommands:     getCommands,
     say:             say,
     reply:           reply,
     dm:              dm

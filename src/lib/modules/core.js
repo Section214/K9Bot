@@ -9,8 +9,11 @@
 'use strict';
 
 
+const fs          = require('fs');
+const string      = require('string');
 const utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
 const config      = require(GLOBAL.k9path + '/lib/core/config.js');
+const all_modules = fs.readdirSync(GLOBAL.k9path + '/lib/modules');
 
 
 /**
@@ -145,6 +148,55 @@ class coreModule {
      */
     _ping(res) {
         utils.dm(res, 'pong');
+    }
+
+
+    /**
+     * Display help
+     *
+     * @since       0.1.6
+     * @access      public
+     * @param       {object} res The message resource
+     * @return      {void}
+     */
+    _help(res) {
+        let module_name  = '';
+        let command_list = '';
+        let inactive     = '';
+
+        // Owner commands
+        if(res.message.author.id === config.get('auth', 'owner_id')) {
+            command_list = command_list + utils.getCommands('owner');
+        }
+
+        // Core commands
+        command_list = command_list + utils.getCommands('core');
+
+        // Other commands
+        all_modules.forEach(function(module) {
+            module_name = string(module).strip('.js').s;
+
+            if(module_name !== 'core' && module_name !== 'owner') {
+                if(config.get('modules', module_name + ':enabled')) {
+                    command_list = command_list + utils.getCommands(module_name);
+                } else {
+                    inactive = inactive + module_name + ', ';
+                }
+            }
+        });
+
+        // Print commands
+        command_list = '__**Commands:**__\n' + command_list;
+
+        // Print inactive modules
+        if(inactive) {
+            inactive = string(inactive).chompRight(', ').s;
+
+            command_list = command_list + '\n__**Inactive Modules:**__\n' + inactive;
+        }
+
+        utils.dm(res, command_list);
+        return;
     }
 }
 
