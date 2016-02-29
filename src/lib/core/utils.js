@@ -138,11 +138,31 @@ function reply(res, message) {
 }
 
 
+/**
+ * DM user
+ *
+ * @since       0.1.3
+ * @access      public
+ * @param       {object} res The message resource
+ * @param       {string} message The message to post
+ * @return      {void}
+ */
+function dm(res, message) {
+    let sender = GLOBAL.bot.Users.getBy('id', res.message.author.id);
+
+    sender.openDM().then(function(ch) {
+        ch.sendTyping();
+        ch.sendMessage(message);
+    });
+}
+
+
 module.exports = {
     parseInviteCode: parseInviteCode,
     connect:         connect,
     isBotMessage:    isBotMessage,
     fileExists:      fileExists,
     say:             say,
-    reply:           reply
+    reply:           reply,
+    dm:              dm
 };
