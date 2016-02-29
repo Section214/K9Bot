@@ -9,7 +9,7 @@ K9 is (being) designed to function as a flexible, modular, multi-purpose Discord
 
 ## Commands
 
-Check out the latest command list [here](https://github.com/Section214/K9Bot/wiki/Commands)
+Check out the latest command list [here](https://github.com/Section214/K9Bot/wiki/Commands).
 
 ## Npm Installation
 
