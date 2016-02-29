@@ -170,22 +170,34 @@ class ownerModule {
             return;
         }
 
-        let module_name = '';
-        let module_list = '';
+        let module_name   = '';
+        let module_string = '';
+        let active        = '';
+        let inactive      = '';
 
         all_modules.forEach(function(module) {
             module_name = string(module).strip('.js').s;
 
             if(module_name !== 'core' && module_name !== 'owner') {
                 if(config.get('modules', module_name + ':enabled')) {
-                    module_list = module_list + '[+] ' + module_name + '\n';
+                    active = active + module_name + ', ';
                 } else {
-                    module_list = module_list + '[-] ' + module_name + '\n';
+                    inactive = inactive + module_name + ', ';
                 }
             }
         });
 
-        utils.dm(res, 'Available modules:\n```' + module_list + '```');
+        active = string(active).chompRight(', ').s;
+
+        module_string = module_string + '__**Loaded modules:**__\n' + active;
+
+        if(inactive) {
+            inactive = string(inactive).chompRight(', ').s;
+
+            module_string = module_string + '\n\n__**Unloaded modules:**__\n' + inactive;
+        }
+
+        utils.dm(res, module_string);
         return;
     }
 

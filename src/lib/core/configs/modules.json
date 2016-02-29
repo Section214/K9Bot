@@ -89,7 +89,7 @@
     }
   },
   "giphy": {
-    "enabled": false,
+    "enabled": true,
     "commands": {
       "giphy": {
         "desc": "Gets a random Giphy image for a given keyword.",
