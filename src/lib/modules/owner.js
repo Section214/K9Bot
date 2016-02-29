@@ -26,6 +26,26 @@ class ownerModule {
 
 
     /**
+     * Check if the person requesting this is the bot owner!
+     *
+     * @since       0.1.6
+     * @access      public
+     * @param       {object} res The message resource
+     * @return      {void}
+     */
+    isOwner(res) {
+        let config = require(GLOBAL.k9path + '/lib/core/config.js');
+
+        // Owner has all
+        if(res.message.author.id === config.get('auth', 'owner_id')) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
      * Connect to a given server
      *
      * @since       0.1.5
@@ -35,6 +55,10 @@ class ownerModule {
      * @return      {void}
      */
     _connect(res, arguement) {
+        if(! this.isOwner(res)) {
+            return;
+        }
+
         if(! arguement || arguement === ' ') {
             utils.dm(res, 'You forgot to provide an invite URL!');
             return;
@@ -58,6 +82,10 @@ class ownerModule {
      * @return      {void}
      */
     _disconnect(res) {
+        if(! this.isOwner(res)) {
+            return;
+        }
+
         logger.notify('info', 'Received exit command. Shutting down...');
         utils.say(res, 'Bye!');
         GLOBAL.bot.disconnect();
@@ -138,6 +166,10 @@ class ownerModule {
      * @return      {void}
      */
     _modules(res) {
+        if(! this.isOwner(res)) {
+            return;
+        }
+
         let module_name = '';
         let module_list = '';
 
@@ -168,6 +200,10 @@ class ownerModule {
      * @return      {void}
      */
     _load(res, arguement) {
+        if(! this.isOwner(res)) {
+            return;
+        }
+
         let module_name  = '';
         let module_found = false;
 
@@ -234,6 +270,10 @@ class ownerModule {
      * @return      {void}
      */
     _unload(res, arguement) {
+        if(! this.isOwner(res)) {
+            return;
+        }
+
         let module_name  = '';
         let module_found = false;
 
