@@ -11,16 +11,15 @@
 const path         = require('path');
 const nconf        = require('nconf');
 const logger       = require(path.join(GLOBAL.k9path + '/lib/core/logging.js'));
-const utils        = require(path.join(GLOBAL.k9path + '/lib/core/utils.js'));
 const user_configs = path.join(GLOBAL.k9path, '../config/');
 const core_configs = path.join(GLOBAL.k9path, '/lib/core/configs/');
 
 // Define the available config files
 const configs = {
     'internal': core_configs + 'internal.json',
-    'modules': core_configs + 'modules.json',
-    'auth': user_configs + 'auth.json',
-    'config': user_configs + 'config.json'
+    'modules':  core_configs + 'modules.json',
+    'auth':     user_configs + 'auth.json',
+    'config':   user_configs + 'config.json'
 };
 
 

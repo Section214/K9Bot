@@ -29,7 +29,6 @@ class command_processor {
         let Discordie   = require('discordie');
         let logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
         let config      = require(GLOBAL.k9path + '/lib/core/config.js');
-        //let permissions = require(GLOBAL.k9path + '/lib/core/permissions.js');
         let utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
         let modules     = require(GLOBAL.k9path + '/lib/core/modules.js');
         let trigger     = config.get('config', 'trigger', '!').toLowerCase();

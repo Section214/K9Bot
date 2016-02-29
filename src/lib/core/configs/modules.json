@@ -1,6 +1,6 @@
 {
   "8ball": {
-    "enabled": true,
+    "enabled": false,
     "commands": {
       "8ball": {
         "desc": "8 Ball",
@@ -21,7 +21,9 @@
       },
       "leave": {
         "desc": "Leave",
-        "aliases": ["part"]
+        "aliases": [
+          "part"
+        ]
       },
       "afk": {
         "desc": "AFK",
@@ -29,11 +31,19 @@
       },
       "disconnect": {
         "desc": "Disconnect",
-        "aliases": ["quit", "shutdown", "die", "goaway", "bye"]
+        "aliases": [
+          "quit",
+          "shutdown",
+          "die",
+          "goaway",
+          "bye"
+        ]
       },
       "nickname": {
         "desc": "Nickname",
-        "aliases": ["nick"]
+        "aliases": [
+          "nick"
+        ]
       },
       "load": {
         "desc": "Load",
@@ -50,7 +60,7 @@
     }
   },
   "giphy": {
-    "enabled": true,
+    "enabled": false,
     "commands": {
       "giphy": {
         "desc": "Giphy",
@@ -59,7 +69,7 @@
     }
   },
   "weather": {
-    "enabled": true,
+    "enabled": false,
     "commands": {
       "weather": {
         "desc": "Weather",
@@ -68,7 +78,7 @@
     }
   },
   "urban": {
-    "enabled": true,
+    "enabled": false,
     "commands": {
       "urban": {
         "desc": "Urban Dictionary",
