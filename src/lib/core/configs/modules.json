@@ -47,11 +47,15 @@
       },
       "load": {
         "desc": "Load",
-        "aliases": false
+        "aliases": [
+          "enable"
+        ]
       },
       "unload": {
         "desc": "Unload",
-        "aliases": false
+        "aliases": [
+          "disable"
+        ]
       },
       "ping": {
         "desc": "Ping",

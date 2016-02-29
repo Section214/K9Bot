@@ -14,7 +14,6 @@ const string      = require('string');
 const utils       = require(GLOBAL.k9path + '/lib/core/utils.js');
 const config      = require(GLOBAL.k9path + '/lib/core/config.js');
 const logger      = require(GLOBAL.k9path + '/lib/core/logging.js');
-const modules     = require(GLOBAL.k9path + '/lib/core/modules.js');
 const all_modules = fs.readdirSync(GLOBAL.k9path + '/lib/modules');
 
 
@@ -101,7 +100,7 @@ class coreModule {
      * @return      {void}
      */
     _part(res) {
-        this.leave(res);
+        this._leave(res);
     }
 
 
@@ -156,7 +155,7 @@ class coreModule {
      * @return      {void}
      */
     _quit(res) {
-        this.disconnect(res);
+        this._disconnect(res);
     }
 
 
@@ -169,7 +168,7 @@ class coreModule {
      * @return      {void}
      */
     _shutdown(res) {
-        this.disconnect(res);
+        this._disconnect(res);
     }
 
 
@@ -182,7 +181,7 @@ class coreModule {
      * @return      {void}
      */
     _die(res) {
-        this.disconnect(res);
+        this._disconnect(res);
     }
 
 
@@ -195,7 +194,7 @@ class coreModule {
      * @return      {void}
      */
     _goaway(res) {
-        this.disconnect(res);
+        this._disconnect(res);
     }
 
 
@@ -208,7 +207,7 @@ class coreModule {
      * @return      {void}
      */
     _bye(res) {
-        this.disconnect(res);
+        this._disconnect(res);
     }
 
 
@@ -241,7 +240,7 @@ class coreModule {
      * @return      {void}
      */
     _nick(res, arguement) {
-        this.nickname(res, arguement);
+        this._nickname(res, arguement);
     }
 
 
@@ -255,7 +254,59 @@ class coreModule {
      * @return      {void}
      */
     _load(res, arguement) {
+        let module_name  = '';
+        let module_found = false;
 
+        if(! arguement || arguement === ' ') {
+            utils.reply(res, 'No module specified!');
+            return;
+        }
+
+        arguement = arguement.toLowerCase();
+
+        all_modules.forEach(function(module) {
+            module_name = string(module).strip('.js').s;
+
+            if(module_name === arguement) {
+                if(config.get('modules', module_name + ':enabled') !== true) {
+                    module_found = true;
+
+                    config.set('modules', module_name + ':enabled', true);
+                    config.save('modules');
+
+                    GLOBAL.k9modules[module_name] = require(GLOBAL.k9path + '/lib/modules/' + module);
+
+                    utils.reply(res, '"' + module_name + '" loaded!');
+                    logger.log('info', module_name + ' loaded successfully');
+                    return;
+                } else {
+                    module_found = true;
+
+                    utils.reply(res, '"' + module_name + '" is already loaded!');
+                    return;
+                }
+            }
+        });
+
+        if(! module_found) {
+            utils.reply(res, '"' + arguement + '" not found!');
+            logger.log('warn', arguement + ' not found!');
+            return;
+        }
+    }
+
+
+    /**
+     * Alias for load
+     *
+     * @since       0.1.5
+     * @access      public
+     * @param       {object} res The message resource
+     * @param       {string} arguements The command arguements
+     * @return      {void}
+     */
+    _enable(res, arguement) {
+        this._load(res, arguement);
     }
 
 
@@ -288,15 +339,22 @@ class coreModule {
                 module_name = string(module).strip('.js').s;
 
                 if(module_name === arguement) {
-                    module_found = true;
+                    if(config.get('modules', module_name + ':enabled') === true) {
+                        module_found = true;
 
-                    config.set('modules', module_name + ':enabled', false);
-                    config.save('modules');
+                        config.set('modules', module_name + ':enabled', false);
+                        config.save('modules');
 
-                    delete(GLOBAL.k9modules[module_name]);
-                    utils.reply(res, '"' + module_name + '" unloaded!');
-                    logger.log('info', module_name + ' unloaded successfully');
-                    return;
+                        delete(GLOBAL.k9modules[module_name]);
+                        utils.reply(res, '"' + module_name + '" unloaded!');
+                        logger.log('info', module_name + ' unloaded successfully');
+                        return;
+                    } else {
+                        module_found = true;
+
+                        utils.reply(res, '"' + module_name + '" is not loaded!');
+                        return;
+                    }
                 }
             });
         }
@@ -306,6 +364,20 @@ class coreModule {
             logger.log('warn', arguement + ' not found!');
             return;
         }
+    }
+
+
+    /**
+     * Alias for unload
+     *
+     * @since       0.1.5
+     * @access      public
+     * @param       {object} res The message resource
+     * @param       {string} arguements The command arguements
+     * @return      {void}
+     */
+    _disable(res, arguement) {
+        this._unload(res, arguement);
     }
 
 
