@@ -1,3 +1,12 @@
+## v1.0.0 / Mon, 29 Feb 2016
+* Yay! We made it to our first stable release!
+* GIFs are awesome, so we added a Giphy module to make all your channels geferific (is that a word? I think we made up a word...)!
+* Because sometimes it's too hard to look out the window... we've added a weather module!
+* There's so many weird words out there... find their definitions with the new Urban Dictionary module!
+* With so many modules available now, we thought it was high time you could load/unload them as you see fit.
+* Some things should be private... so K9 now sends some things as private messages instead of public replies.
+* Not ALL users are god, so we've split owner-only commands into their own module.
+
 ## v0.1.5 / Sun, 28 Feb 2016
 * This shouldn't really have been a separate update, but we forgot to add it... oh well, first step towards making things modular!
 
