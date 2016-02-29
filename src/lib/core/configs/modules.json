@@ -49,5 +49,14 @@
         "aliases": false
       }
     }
+  },
+  "weather": {
+    "enabled": true,
+    "commands": {
+      "weather": {
+        "desc": "Weather",
+        "aliases": false
+      }
+    }
   }
 }

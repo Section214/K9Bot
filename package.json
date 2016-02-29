@@ -32,6 +32,8 @@
     "string": "^3.3.1",
     "moment": "^2.11.2",
     "giphy-api": "^1.1.14",
+    "weather-js": "^1.0.2",
+    "temp-units-conv": "^0.1.1",
     "acl": "^0.4.9"
   },
   "devDependencies": {
