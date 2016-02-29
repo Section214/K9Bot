@@ -34,14 +34,14 @@ class command_processor {
         let trigger     = config.get('config', 'trigger', '!').toLowerCase();
 
         GLOBAL.bot.Dispatcher.on(Discordie.Events.MESSAGE_CREATE, (res) => {
-            logger.notify('info', 'New message:\n  From: ' + res.message.author.username + '\n  Content: ' + res.message.content + '\n  Timestamp: ' + res.message.timestamp );
-
             let command_string = res.message.content;
 
             // Make sure we're talking to K9!
             if(! string(command_string.toLowerCase()).startsWith(trigger.toLowerCase()) && ! utils.isBotMessage(res.message.channel_id)) {
                 return;
             }
+
+            logger.notify('info', 'New message:\n  From: ' + res.message.author.username + '\n  Content: ' + res.message.content + '\n  Timestamp: ' + res.message.timestamp );
 
             // Parse out any arguements
             command_string = command_string.split(' ');
