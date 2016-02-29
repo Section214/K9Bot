@@ -7,9 +7,9 @@
 
 K9 is (being) designed to function as a flexible, modular, multi-purpose Discord bot. More than that, however, it's my first attempt to actually learn Node.JS... So go easy on me!
 
-Right now, K9 doesn't do much... he can join/leave channels, go afk, and play ping-pong... but I'm working on it!
+## Commands
 
-<!--More information can be found at [section214.com](https://section214.com/product/k9bot).-->
+Check out the latest command list [here](https://github.com/Section214/K9Bot/wiki/Commands)
 
 ## Npm Installation
 
