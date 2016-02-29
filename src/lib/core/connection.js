@@ -122,6 +122,9 @@ class connection {
 
                 logger.notify('info', connected_to);
 
+                // Set default status
+                utils.setStatus();
+
                 // Load command processor
                 require(GLOBAL.k9path + '/lib/core/command_processor.js');
             } else {

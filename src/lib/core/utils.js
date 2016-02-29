@@ -206,6 +206,28 @@ function dm(res, message) {
 }
 
 
+/**
+ * Set bot status
+ *
+ * @since       1.0.3
+ * @access      public
+ * @param       {string] status The status message to show
+ * @return      {void}
+ */
+function setStatus(status) {
+    let config = require(GLOBAL.k9path + '/lib/core/config.js');
+
+    // Get the default, if any
+    if(! status) {
+        status = config.get('config', 'default_status', false);
+    }
+
+    if(status) {
+        GLOBAL.bot.User.setStatus(null, { name: status });
+    }
+}
+
+
 module.exports = {
     parseInviteCode: parseInviteCode,
     connect:         connect,
@@ -214,5 +236,6 @@ module.exports = {
     getCommands:     getCommands,
     say:             say,
     reply:           reply,
-    dm:              dm
+    dm:              dm,
+    setStatus:       setStatus
 };
