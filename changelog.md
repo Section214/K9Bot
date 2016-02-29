@@ -1,3 +1,6 @@
+## v1.0.2 / Mon, 29 Feb 2016
+* We forgot to update the readme :(
+
 ## v1.0.1 / Mon, 29 Feb 2016
 * Since K9 is actually a thing now, figured we should add an about command.
 
