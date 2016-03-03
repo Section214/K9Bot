@@ -123,6 +123,16 @@
       }
     }
   },
+  "chat": {
+    "enabled": true,
+    "commands": {
+      "tell": {
+        "desc": "Tell a user something.",
+        "param": "@user/#channel message",
+        "aliases": false
+      }
+    }
+  },
   "audio": {
     "enabled": true,
     "commands": {

@@ -167,8 +167,17 @@ function getCommands(module) {
  * @return      {void}
  */
 function say(res, message) {
-    res.message.channel.sendTyping();
-    res.message.channel.sendMessage(message);
+    if(typeof res === 'string') {
+        let string  = require('string');
+        let channel = string(res).chompLeft('<#').chompRight('>').s;
+        channel = GLOBAL.bot.Channels.getBy('id', channel);
+
+        channel.sendTyping();
+        channel.sendMessage(message);
+    } else {
+        res.message.channel.sendTyping();
+        res.message.channel.sendMessage(message);
+    }
 }
 
 
@@ -197,9 +206,18 @@ function reply(res, message) {
  * @return      {void}
  */
 function dm(res, message) {
-    let sender = GLOBAL.bot.Users.getBy('id', res.message.author.id);
+    let user = '';
 
-    sender.openDM().then(function(ch) {
+    if(typeof res === 'string') {
+        let string = require('string');
+        user = string(res).chompLeft('<@').chompRight('>').s;
+    } else {
+        user = res.message.author.id;
+    }
+
+    user = GLOBAL.bot.Users.getBy('id', user);
+
+    user.openDM().then(function(ch) {
         ch.sendTyping();
         ch.sendMessage(message);
     });
