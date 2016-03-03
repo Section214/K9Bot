@@ -46,3 +46,6 @@ config/db.json
 config/auth.json
 config/config.json
 src/lib/core/configs/internal.json
+
+# Media cache
+cache
