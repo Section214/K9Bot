@@ -122,5 +122,62 @@
         "aliases": false
       }
     }
+  },
+  "audio": {
+    "enabled": true,
+    "commands": {
+      "play": {
+        "desc": "Plays a given audio track.",
+        "param": "link/title",
+        "aliases": false
+      },
+      "queue": {
+        "desc": "Prints the current playback queue.",
+        "param": false,
+        "aliases": false
+      },
+      "np": {
+        "desc": "Prints the details for the currently playing song.",
+        "param": false,
+        "aliases": false
+      },
+      "skip": {
+        "desc": "Skip (or vote to skip) the current song.",
+        "param": false,
+        "aliases": [
+          "next"
+        ]
+      },
+      "clear": {
+        "desc": "Clears the current queue (owner only).",
+        "param": false,
+        "aliases": false
+      },
+      "pause": {
+        "desc": "Pauses playback.",
+        "param": false,
+        "aliases": false
+      },
+      "resume": {
+        "desc": "Resumes playback of a paused song.",
+        "param": false,
+        "aliases": false
+      },
+      "volume": {
+        "desc": "Changes the playback volume, or prints the current volume.",
+        "param": "volume",
+        "aliases": false
+      },
+      "record": {
+        "desc": "Tells me to begin recording the current channel.",
+        "param": false,
+        "aliases": false
+      },
+      "stop": {
+        "desc": "Tells me to stop recording.",
+        "param": false,
+        "aliases": false
+      }
+    }
   }
 }

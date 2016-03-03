@@ -2,5 +2,7 @@
   "trigger": "The key or string used to identify bot commands (we recommend !)",
   "default_status": "Status to show if not playing anything",
   "giphy_api_key": "Giphy API key. If blank, we'll use the beta API key",
-  "giphy_rating": "limit Giphy by rating (y, g, pg, pg-13 or r)"
+  "giphy_rating": "limit Giphy by rating (y, g, pg, pg-13 or r)",
+  "auto_join": "Whether or not K9 should auto-join your voice channel on playback if he is not in a voice channel (true/false)",
+  "cache_dir": "The absolute path to the cache directory for audio playback"
 }
